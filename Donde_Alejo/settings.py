@@ -147,3 +147,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'carenrojas212005@gmail.com' 
 EMAIL_HOST_PASSWORD = 'lewq pwwr lthx tbff' 
 # DEFAULT_FROM_EMAIL = 'carenrojas212005@gmail.com' 
+
+LOGIN_REDIRECT_URL = '/perfil/'

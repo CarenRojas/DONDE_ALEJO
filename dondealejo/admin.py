@@ -37,3 +37,22 @@ try:
     admin.site.register(Orden, OrdenAdmin)
 except AlreadyRegistered:
     pass
+
+
+
+from django.contrib import admin
+from .models import Reserva, Domicilio
+
+@admin.register(Reserva)
+class ReservaAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'email', 'telefono', 'fecha', 'hora', 'cantidad_personas', 'creada')
+    search_fields = ('nombre', 'email', 'telefono')
+    list_filter = ('fecha', 'hora')
+    ordering = ('-creada',)
+
+@admin.register(Domicilio)
+class DomicilioAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'email', 'telefono', 'fecha')
+    search_fields = ('nombre', 'email', 'telefono')
+    list_filter = ('fecha',)
+    readonly_fields = ('fecha',)

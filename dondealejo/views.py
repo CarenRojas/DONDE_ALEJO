@@ -71,8 +71,9 @@ def login(request):
     return render(request, 'login.html')
 
 from django.shortcuts import render
-
+from django.contrib import messages
 from .models import Producto, CarritoItem
+
 def productos(request):
     producto_lista = Producto.objects.all()
 
@@ -86,31 +87,47 @@ def productos(request):
                     request.session.create()
                 sesion_id = request.session.session_key
                 
-                carrito_item, created = CarritoItem.objects.get_or_create(
+                carrito_item = CarritoItem.objects.filter(
                     producto=producto,
                     sesion_id=sesion_id,
                     usuario=None
-                )
+                ).first()
                 
-                if not created:
+                if carrito_item:
                     carrito_item.cantidad += 1
-                    carrito_item.save()
+                else:
+                    carrito_item = CarritoItem(
+                        producto=producto,
+                        sesion_id=sesion_id,
+                        usuario=None,
+                        cantidad=1
+                    )
+                carrito_item.save()
+            
             else:
-                carrito_item, created = CarritoItem.objects.get_or_create(
+                carrito_item = CarritoItem.objects.filter(
                     producto=producto,
                     usuario=request.user,
                     sesion_id=None
-                )
+                ).first()
                 
-                if not created:
+                if carrito_item:
                     carrito_item.cantidad += 1
-                    carrito_item.save()
+                else:
+                    carrito_item = CarritoItem(
+                        producto=producto,
+                        usuario=request.user,
+                        sesion_id=None,
+                        cantidad=1
+                    )
+                carrito_item.save()
             
             messages.success(request, f"{producto.nombre} añadido al carrito")
         except Producto.DoesNotExist:
             messages.error(request, "Producto no encontrado")
     
     return render(request, 'menu.html', {'productos': producto_lista})
+
 
 
 from django.contrib.auth.models import User
@@ -178,16 +195,21 @@ def perfil (request):
 def bienvenidos (request):
     return render(request, 'bienvenidos.html')
 
-
 def almuerzo (request):
     return render(request, 'almuerzo.html')
-    
+
+
+def desayunos (request):
+    return render(request, 'desayunos.html')
+
 
 def cafeteria (request):
     return render(request, 'cafeteria.html')
 
+
 def quienes_somos (request):
     return render(request, 'quienes_somos.html')
+
 
 def carrito (request):
     return render(request, 'carrito.html')
@@ -286,6 +308,8 @@ from django.contrib import messages
 from .models import CarritoItem, Orden, OrdenItem
 from .forms import OrdenForm
 from .models import Datos
+
+
 def pasarela(request):
     carrito_items = []
     total = 0
@@ -305,7 +329,10 @@ def pasarela(request):
     
     if request.method == 'POST':
         form = OrdenForm(request.POST)
-        if form.is_valid():
+        metodo_pago = request.POST.get('metodo_pago')
+
+
+        if form.is_valid()  and metodo_pago:
             orden = form.save(commit=False)
             
             if request.user.is_authenticated:
@@ -314,6 +341,7 @@ def pasarela(request):
                 orden.sesion_id = request.session.session_key
             
             orden.total = total
+            orden.metodo_pago = metodo_pago 
             orden.save()
             
             for item in carrito_items:
@@ -326,9 +354,15 @@ def pasarela(request):
             
             carrito_items.delete()
             
+            enviar_correo_confirmacion(orden)
+
             messages.success(request, "Tu pedido ha sido procesado con éxito")
             return redirect('confirmacion', orden_id=orden.id)
+        else:
+            messages.error(request, "Por favor selecciona un método de pago válido.")
+
     else:
+
         initial_data = {}
         if request.user.is_authenticated:
             try:
@@ -367,3 +401,203 @@ def confirmacion(request, orden_id):
     except Orden.DoesNotExist:
         messages.error(request, "Orden no encontrada")
         return redirect('productos')
+    
+
+def enviar_correo_confirmacion(orden):
+    """ Envía un correo de confirmación al cliente """
+    asunto = f"Confirmación de Pedido #{orden.id}"
+    mensaje = f"""
+    Hola {orden.nombre},
+
+
+    Gracias por tu compra. Hemos recibido verificar la compra en su cuenta .
+     **Detalles del Pedido**
+    - Número de Pedido: {orden.id}
+    - Total: ${orden.total}
+    - Método de Pago: {orden.get_metodo_pago_display()}
+    - Fecha: {orden.fecha_creacion.strftime('%d/%m/%Y %H:%M')}
+     **Productos Comprados**:
+    """
+
+    # Agregar productos al mensaje
+    items = OrdenItem.objects.filter(orden=orden)
+    for item in items:
+        mensaje += f"\n - {item.cantidad} x {item.producto.nombre} (${item.precio} c/u)"
+    mensaje += "\n\nGracias por confiar en nosotros. �\n\nSaludos,\nTu tienda online"
+
+    send_mail(
+        asunto,
+        mensaje,
+        'samuellemos907@gmail.com',
+        [orden.email],
+        fail_silently=False,
+)
+
+
+#perfil
+from  .models import Perfil
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def perfil(request):
+    user_profile, created = Perfil.objects.get_or_create(user=request.user)
+    return render(request, "perfil.html", {"user_profile": user_profile, "user": request.user})
+
+
+
+#sugerencia
+from django.shortcuts import render
+from django.core.mail import send_mail
+from django.contrib import messages
+from .forms import SugerenciaForm
+
+def buzon_sugerencias(request):
+    success = False
+
+    if request.method == "POST":
+        form = SugerenciaForm(request.POST)
+        if form.is_valid():
+            sugerencia = form.save()
+
+            try:
+                from django.conf import settings
+                
+                send_mail(
+                    "Nueva Sugerencia Recibida",
+                    f"Nombre: {sugerencia.nombre}\nCorreo: {sugerencia.email}\n\nMensaje:\n{sugerencia.mensaje}",
+                    settings.EMAIL_HOST_USER,  
+                    ["rojaskaren2105@gmail.com"],  
+                    fail_silently=False,
+                )
+                
+                send_mail(
+                    "Gracias por tu sugerencia",
+                    f"Hola {sugerencia.nombre},\n\nGracias por tu sugerencia. La tendremos en cuenta.",
+                    settings.EMAIL_HOST_USER,
+                    [sugerencia.email],
+                    fail_silently=False,
+                )
+                
+                success = True
+                messages.success(request, "¡Tu sugerencia ha sido enviada exitosamente!")
+            except Exception as e:
+                print(f"Error al enviar correo: {e}")  # Log del error
+                messages.error(request, f"Error al enviar el correo: {e}")
+        else:
+            messages.error(request, "Error al enviar la sugerencia. Inténtalo de nuevo.")
+    else:
+        form = SugerenciaForm()
+
+    return render(request, "quienes_somos.html", {"form": form, "success": success})
+
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import DomicilioForm
+
+from django.shortcuts import render, redirect
+from django.core.mail import send_mail
+from django.contrib import messages
+from django.conf import settings
+from django.urls import reverse
+from .models import Domicilio
+from .forms import DomicilioForm
+
+def solicitar_domicilio(request):
+    if request.method == "POST":
+        form = DomicilioForm(request.POST)
+        if form.is_valid():
+            nuevo_pedido = form.save()
+            
+            nombre = form.cleaned_data['nombre']
+            email_usuario = form.cleaned_data['email']
+            direccion = form.cleaned_data['direccion']
+            telefono = form.cleaned_data['telefono']
+            pedido = form.cleaned_data['pedido']
+            
+            asunto_cliente = "Confirmación de pedido a domicilio - Don de Alejo"
+            mensaje_cliente = f"""
+            Hola {nombre},
+
+            Hemos recibido tu pedido a domicilio. Pronto empezaremos a prepararlo.
+            
+            Detalles de tu pedido:
+            {pedido}
+            
+            Será enviado a:
+            {direccion}
+            
+            ¡Gracias por elegir Don de Alejo!
+            """
+            
+            asunto_admin = f"Nuevo pedido a domicilio de {nombre}"
+            mensaje_admin = f"""
+            Se ha recibido un nuevo pedido a domicilio:
+            
+            Nombre: {nombre}
+            Email: {email_usuario}
+            Teléfono: {telefono}
+            Dirección: {direccion}
+            
+            Detalles del pedido:
+            {pedido}
+            """
+            
+            try:
+                send_mail(
+                    asunto_cliente,
+                    mensaje_cliente,
+                    settings.EMAIL_HOST_USER,
+                    [email_usuario],
+                    fail_silently=False,
+                )
+                
+                admin_email = getattr(settings, 'ADMIN_EMAIL', 'carenrojas212005@gmail.com')
+                send_mail(
+                    asunto_admin,
+                    mensaje_admin,
+                    settings.EMAIL_HOST_USER,
+                    [admin_email],
+                    fail_silently=False,
+                )
+                
+                messages.success(request, "¡Tu pedido ha sido enviado con éxito! Recibirás un correo de confirmación.")
+            except Exception as e:
+                print(f"Error al enviar correo: {e}")
+                messages.warning(request, "Tu pedido ha sido registrado, pero hubo un problema al enviar el correo de confirmación.")
+            
+            return redirect('domicilios') 
+        else:
+            messages.error(request, "Por favor corrige los errores en el formulario.")
+    else:
+        form = DomicilioForm()
+    
+    return render(request, "domicilios.html", {'form': form})
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import ReservaForm
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import ReservaForm
+
+def reservar(request):
+    if request.method == 'POST':
+        form = ReservaForm(request.POST)
+        if form.is_valid():
+            reserva = form.save()
+            
+            try:
+                form.send_mail()
+                messages.success(request, "Tu reserva ha sido realizada con éxito. Te hemos enviado un correo de confirmación.")
+            except Exception as e:
+                print(f"Error al enviar correo: {e}")
+                messages.success(request, "Tu reserva ha sido realizada con éxito.")
+            
+            return redirect('reservar')
+        else:
+            messages.error(request, "Por favor corrige los errores en el formulario.")
+    else:
+        form = ReservaForm()
+    
+    return render(request, 'reservar.html', {'form': form})

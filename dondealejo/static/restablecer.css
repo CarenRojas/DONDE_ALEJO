@@ -1,18 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap');
-
-
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body{
-    font-family: Arial, sans-serif;
-    background: linear-gradient(45deg, #a85a00c9,#ffffffc0 );  
-    /* background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)), url('/static/img/fondo-login.jpg'); 
-	background-size: 100% 100%;
-	background-repeat: no-repeat;  */
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,87 +9,81 @@ body{
     margin: 0;
 }
 
-.caja {
-    background-color: rgba(255, 255, 255, 0.2); /* Fondo blanco con transparencia */
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Borde semitransparente */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
-    width: 400px;
+/* Contenedor del formulario */
+.container {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
+    width: 350px;
 }
 
-
-main {
-    background-color: rgba(255, 255, 255, 0.466);
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-}
-
+/* Título */
 h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: rgb(0, 0, 0);
-    font-size: 2.2rem;
+    color: #333;
+    margin-bottom: 15px;
 }
 
-input[type="text"],
-input[type="password"] {
+/* Texto descriptivo */
+p {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Campos de entrada */
+input[type="email"] {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     margin: 10px 0;
-    border: 1px solid #dddddd93;
-    border-radius: 4px;
-    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.password-container {
-    position: relative;
-}
-
-#togglepassword {
-    position: absolute;
-    top: 50;
-    right: 10px;
-    transform: translateY(-50%);
-    cursor: pointer;
-}
-
+/* Botón de envío */
 button {
     width: 100%;
-    padding: 12px;
-    background-color: #703100;
-    color: rgb(255, 255, 255);
+    padding: 10px;
+    background: #6e8efb;
+    color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 button:hover {
-    background-color: #ffae00;
-    color: rgb(0, 0, 0);
-    transform: scale(1.0);
+    background: #5a7be0;
 }
 
-p {
-    text-align: center;
+/* Mensajes de Django */
+.messages {
     margin-top: 10px;
-    font-size: 15px;
-    color: rgb(0, 0, 0);
 }
 
-a {
-    color: rgb(0, 26, 255);
+.success {
+    color: green;
+    font-size: 14px;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+}
+
+/* Enlace de inicio de sesión */
+.login-link {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-link a {
+    color: #6e8efb;
     text-decoration: none;
+    font-weight: bold;
 }
 
-a:hover {
+.login-link a:hover {
     text-decoration: underline;
 }

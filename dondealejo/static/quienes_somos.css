@@ -54,3 +54,13 @@ iframe {
     color: #000000; 
     font-size: 1.8rem; 
 }
+
+
+.success-message {
+    color: green;
+    font-weight: bold;
+}
+.error-message {
+    color: red;
+    font-weight: bold;
+}

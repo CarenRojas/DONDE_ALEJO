@@ -619,13 +619,126 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password', 'password']
+
+
+
+#pasarela
 from .models import Orden
+
 class OrdenForm(forms.ModelForm):
+    METODOS_PAGO = [
+        ('nequi', 'Nequi'),
+        ('bancolombia', 'Bancolombia'),
+    ]
+
+    metodo_pago = forms.ChoiceField(
+        choices=METODOS_PAGO,
+        widget=forms.RadioSelect,
+        required=True
+    )
     class Meta:
         model = Orden
-        fields = ['nombre', 'email', 'telefono']
+        fields = ['nombre', 'email', 'telefono', 'metodo_pago']
         widgets = {
-            'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Tu nombre completo'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'tucorreo@ejemplo.com'}),
-            'telefono': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Tu número de teléfono'})
+            'nombre': forms.TextInput(attrs={'class': 'form-control',
+'placeholder': 'Tu nombre completo'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control',
+'placeholder': 'tucorreo@ejemplo.com'}),
+            'telefono': forms.TextInput(attrs={'class': 'form-control',
+'placeholder': 'Tu número de teléfono'})
+}
+
+
+#sugerencias
+from django import forms
+from .models import Sugerencia
+
+class SugerenciaForm(forms.ModelForm):
+    class Meta:
+        model = Sugerencia
+        fields = ['nombre', 'email', 'mensaje']
+
+
+
+#reservar
+from django import forms
+from django import forms
+from django.core.mail import send_mail
+from django.conf import settings
+from .models import Reserva
+
+class ReservaForm(forms.ModelForm):
+    class Meta:
+        model = Reserva
+        fields = ['nombre', 'email', 'telefono', 'fecha', 'hora', 'cantidad_personas', 'mensaje']
+        widgets = {
+            'fecha': forms.DateInput(attrs={'type': 'date'}),
+            'hora': forms.TimeInput(attrs={'type': 'time'}),
+        }
+    
+    def send_mail(self):
+        nombre = self.cleaned_data['nombre']
+        email_usuario = self.cleaned_data['email']
+        telefono = self.cleaned_data['telefono']
+        fecha = self.cleaned_data['fecha']
+        hora = self.cleaned_data['hora']
+        personas = self.cleaned_data['cantidad_personas']
+        mensaje = self.cleaned_data.get('mensaje', '')
+        
+        asunto_admin = f'Nueva reserva de {nombre}'
+        mensaje_admin = f"""
+        Se ha recibido una nueva reserva:
+        
+        Nombre: {nombre}
+        Email: {email_usuario}
+        Teléfono: {telefono}
+        Fecha: {fecha}
+        Hora: {hora}
+        Personas: {personas}
+        Mensaje: {mensaje}
+        """
+        email_admin = settings.EMAIL_HOST_USER
+        
+        send_mail(
+            asunto_admin,
+            mensaje_admin,
+            settings.EMAIL_HOST_USER,
+            [email_admin],
+            fail_silently=False,
+        )
+        
+        asunto_usuario = 'Confirmación de tu reserva en Don de Alejo'
+        mensaje_usuario = f"""
+        Hola {nombre},
+        
+        Hemos recibido tu reserva para el {fecha} a las {hora} para {personas} personas.
+        
+        Un miembro de nuestro equipo se pondrá en contacto contigo pronto para confirmar tu reserva.
+        
+        Detalles de tu reserva:
+        Fecha: {fecha}
+        Hora: {hora}
+        Personas: {personas}
+        
+        ¡Gracias por elegir Don de Alejo!
+        """
+        
+        send_mail(
+            asunto_usuario,
+            mensaje_usuario,
+            settings.EMAIL_HOST_USER,
+            [email_usuario],
+            fail_silently=False,
+        )
+
+from django import forms
+from .models import Domicilio
+
+class DomicilioForm(forms.ModelForm):
+    class Meta:
+        model = Domicilio
+        fields = ['nombre', 'email', 'direccion', 'telefono', 'pedido']
+        widgets = {
+            'direccion': forms.Textarea(attrs={'rows': 3}),
+            'pedido': forms.Textarea(attrs={'rows': 5}),
         }

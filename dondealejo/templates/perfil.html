@@ -1,39 +1,34 @@
 {% extends 'base.html' %}
-{% block content %}
 {% load static %}
 
-<div class="profile">
-    <div class="profile-container">
-        <div class="profile-header">
-            <img src="{% static 'img/usuario.png' %}" alt="Foto de perfil" class="profile-pic">
-            <h2>{{ user.first_name }} {{ user.last_name }}</h2>
-            <p class="username">@{{ user.username }}</p>
-        </div>
+{% block titulo %}Perfil de Usuario{% endblock %}
 
-        <div class="profile-info">
-            <div class="input">
-                <label>Nombre completo:</label>
-                <p>{{ user.first_name }} {{ user.last_name }}</p>
-            </div>
-            <div class="input">
-                <label>Nombre de usuario:</label>
-                <p>@{{ user.username }}</p>
-            </div>
-            <div class="input">
-                <label>Correo electrónico:</label>
-                <p>{{ user.email }}</p>
-            </div>
-            <div class="input">
-                <label>Teléfono:</label>
-                <p>{{ user.profile.phone_number|default:"None" }}</p>
-            </div>
-            <div class="input">
-                <label>Dirección:</label>
-                <p>{{ user.profile.address|default:"None" }}</p>
-            </div>
-        </div>
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'profile.css' %}">
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<br>
+<br>
+<br>
+<br>
+<div class="profile-container">
+    <br>
+    <h2 class="usuario">Usuario</h2>
+    <div class="profile-card">
+        <br>
+        <img class="perfil-imagen" src="{% static 'img/cuenta.png' %}" alt="Foto de perfil" class="profile-photo">
+        <br>
+        <ul>
+            <li><strong>Nombre:</strong> {{ user.username }}</li>
+            <li><strong>Email:</strong> {{ user.email }}</li>
+            <li><strong>Fecha de Registro:</strong> {{ user.date_joined|date:"d/m/Y" }}</li>
+        </ul>
     </div>
 </div>
-
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 {% endblock %}

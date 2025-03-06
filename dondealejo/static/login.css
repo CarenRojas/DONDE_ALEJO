@@ -9,10 +9,10 @@
 
 body{
     font-family: Arial, sans-serif;
-    background: linear-gradient(45deg, #a85a00c9,#ffffffc0 );  
-    /* background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)), url('/static/img/fondo-login.jpg'); 
+    /* background: linear-gradient(45deg, #a85a00c9,#ffffffc0 );   */
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)), url('/static/img/fondo-login.jpg'); 
 	background-size: 100% 100%;
-	background-repeat: no-repeat;  */
+	background-repeat: no-repeat; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,12 +21,13 @@ body{
 }
 
 .caja {
-    background-color: rgba(255, 255, 255, 0.2); /* Fondo blanco con transparencia */
-    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.781); /* Fondo blanco con transparencia */
+    padding: 30px;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.3); /* Borde semitransparente */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
-    width: 400px;
+    width: 100%;
+    max-width: 900px;
     text-align: center;
 }
 
@@ -46,8 +47,8 @@ main {
 h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: rgb(0, 0, 0);
-    font-size: 2.2rem;
+    color: rgb(255, 255, 255);
+    font-size: 2.5rem;
 }
 
 input[type="text"],
@@ -75,7 +76,7 @@ input[type="password"] {
 button {
     width: 100%;
     padding: 12px;
-    background-color: #703100;
+    background-color: #000000;
     color: rgb(255, 255, 255);
     border: none;
     border-radius: 4px;
@@ -84,7 +85,7 @@ button {
 }
 
 button:hover {
-    background-color: #ffae00;
+    background-color: #fff200;
     color: rgb(0, 0, 0);
     transform: scale(1.0);
 }
@@ -93,14 +94,21 @@ p {
     text-align: center;
     margin-top: 10px;
     font-size: 15px;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 
 a {
-    color: rgb(0, 26, 255);
+    color: rgb(225, 255, 0);
     text-decoration: none;
 }
 
 a:hover {
     text-decoration: underline;
+}
+
+
+.olvido-contrasena {
+    display: block; 
+    text-align: center; 
+    margin-top: 10px; 
 }

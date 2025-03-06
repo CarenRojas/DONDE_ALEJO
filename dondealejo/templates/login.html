@@ -13,8 +13,11 @@
         <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
             <div>
+                <br>
+                <br>
                 <h2>Inicio de Sesión</h2>
-
+                <br>
+                
             {% if messages %}
 
                 <div class="messages">
@@ -30,12 +33,13 @@
             <br>
             <br>
             <button type="submit">Ingresar</button>
-            <a href="{% url 'restablecer' %}">Olvido su contrasea</a>
+            <a href="{% url 'restablecer' %}" class="olvido-contrasena">Olvido su contrasea</a>
             <br>
             <p>¿No tienes cuenta?    <a href="{% url 'register' %}">Regístrate aquí</a></p>
             </div>
         </form>
     {% endblock %}
     </main>
+</div>
 </body>
 </html>

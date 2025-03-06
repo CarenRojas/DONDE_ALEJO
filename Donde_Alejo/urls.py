@@ -17,12 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from dondealejo import views
-
-
-
-
 from django.conf import settings
 from django.conf.urls.static import static
+# from web.views import perfil
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,8 +28,13 @@ urlpatterns = [
     path('contacto/', views.contacto_view, name='contacto'),
     path('bienvenidos', views.bienvenidos, name='bienvenidos'),
     path('almuerzo', views.almuerzo, name='almuerzo'),
+    path('desayunos', views.desayunos, name='desayunos'),
+    path("solicitar_domicilio/", views.solicitar_domicilio, name="solicitar_domicilio"),
+    path("domicilios", views.solicitar_domicilio, name="domicilios"),
     path('cafeteria', views.cafeteria, name='cafeteria'),
+    path("sugerencias/", views.buzon_sugerencias, name="buzon_sugerencias"),
     path('quienes_somos', views.quienes_somos, name='quienes_somos'),
+    path('reservar', views.reservar, name='reservar'),
     path('register', views.register, name='register'),
     path('login', views.login, name='login'),
     path('restablecer/', views.restablecer, name='restablecer'),
@@ -45,5 +47,7 @@ urlpatterns = [
     path('carrito/eliminar/<int:item_id>/', views.eliminar_item, name='eliminar_item'),
     path('pasarela/', views.pasarela, name='pasarela'),
     path('confirmacion/<int:orden_id>/', views.confirmacion, name='confirmacion'),
+    
+    path('perfil/', views.perfil, name='perfil'),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
