@@ -1,0 +1,77 @@
+body {
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)), url('/static/img/fondo_inicio.jpeg'); 
+	background-size: 100% 90%;
+	background-repeat: no-repeat; 
+}
+form {
+    max-width: 500px;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.647);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+h2 {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 2.4rem;
+    text-align: center;
+}
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+button {
+    background:#A20000;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+button:hover {
+    background: #A20000;
+}
+
+
+
+.alert {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}

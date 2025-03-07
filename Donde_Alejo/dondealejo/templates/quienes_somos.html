@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block title %}Nosotros{% endblock %}
+{% block content %}
+{% load static %} 
+<link rel="stylesheet" href="{% static 'quienes_somos.css' %}">
+<link rel="stylesheet" href="{% static 'sugerencias.css' %}">
+<br>
+<br>
+<section class="mission-vision">
+    <div class="container">
+        <!-- Misión -->
+        <div class="content fade-in">
+            <img src="{% static 'img/alejo-foto.jpeg' %}" alt="Misión" class="image">
+            <br>
+          
+            <h2>Misión</h2>
+            <p>
+                Nuestra misión es deleitar a nuestros clientes con una experiencia culinaria única, 
+                ofreciendo platos preparados con los ingredientes más frescos y de la más alta calidad, 
+                en un ambiente acogedor y elegante.
+            </p>
+        </div>
+
+        <!-- Visión -->
+        <div class="content fade-in">
+            <img src="{% static 'img/integrantes.jpeg' %}" alt="Visión" class="integrantes">
+            <h2>Visión</h2>
+            <p>
+                Ser el restaurante líder en innovación gastronómica, reconocido por la excelencia en 
+                el servicio, la sostenibilidad y por crear momentos inolvidables para nuestros clientes.
+            </p>
+        </div>
+    </div>
+</section>
+
+<br>
+<br>
+
+<div class="contenedor-fom">
+    <div class="formulario fade-in">
+        <h2>Déjanos tu sugerencia</h2>
+        <br>
+        {% if mensaje_exito %}
+            <p class="mensaje-exito">{{ mensaje_exito }}</p>
+        {% else %}
+
+        
+            <form method="post">
+                {% csrf_token %}
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="correo">Correo:</label>
+                <input type="email" id="correo" name="correo" required>
+
+                <label for="mensaje">Tu Sugerencia:</label>
+                <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+
+                <button type="submit">Enviar</button>
+            </form>
+        {% endif %}
+    </div>
+
+    <div class="mapa fade-in">
+        <h2>Ubicación</h2>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.8848366235766!2d-75.62965042522305!3d2.197250258266696!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e24d983f9123a27%3A0x366d3b86224c6e09!2sCra.%209%20%26%20Cl.%208%2C%20Garz%C3%B3n%2C%20Huila!5e0!3m2!1ses!2sco!4v1741302010492!5m2!1ses!2sco" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const fadeElements = document.querySelectorAll(".fade-in");
+    
+        function checkFade() {
+            fadeElements.forEach((element) => {
+                const rect = element.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    element.classList.add("show");
+                }
+            });
+        }
+    
+        window.addEventListener("scroll", checkFade);
+        checkFade(); // Para verificar cuando la página carga
+    });
+    </script>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+{% endblock %}

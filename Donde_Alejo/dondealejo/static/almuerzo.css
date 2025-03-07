@@ -1,0 +1,98 @@
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
+.title {
+    padding: 40px;
+    font-size: 2.5rem;
+    color: #ffffff;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-family: 'Montserrat Alternates', sans-serif;
+} 
+
+.almuerzo {
+    display: flex;
+    justify-content: center;
+}
+
+.days {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px; /* Espaciado entre cajas */
+}
+
+.day {
+    background: #D2B48C;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+    width: 400px;  /* Caja más grande */
+    height: 500px; /* Más altura para la imagen */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.day img {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    max-width: 380px; /* Tamaño máximo */
+    height: 400px; /* Imagen más grande */
+    object-fit: cover; /* Ajuste sin deformación */
+    border-radius: 12px;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.day h3 {
+    font-size: 1.8rem;
+    color: #000000;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+
+.comida {
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+.titulo {
+    font-weight: bold; 
+    font-size: 40px;
+    color: #000000; 
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Botón de pedido */
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+    padding: 50px;
+}
+
+.btn-domicilio {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 14px 25px;
+    background-color: #000000;
+    color: white;
+    font-size: 1.3em;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-domicilio:hover {
+    background-color: #000000;
+    transform: scale(1.05);
+}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}Perfil de Usuario{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'profile.css' %}">
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<br>
+<br>
+<br>
+<br>
+<div class="profile-container">
+    <br>
+    <h2 class="usuario">Usuario</h2>
+    <div class="profile-card">
+        <br>
+        <img class="perfil-imagen" src="{% static 'img/cuenta.png' %}" alt="Foto de perfil" class="profile-photo">
+        <br>
+        <ul>
+            <li><strong>Nombre:</strong> {{ user.username }}</li>
+            <li><strong>Email:</strong> {{ user.email }}</li>
+            <li><strong>Fecha de Registro:</strong> {{ user.date_joined|date:"d/m/Y" }}</li>
+        </ul>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endblock %}
