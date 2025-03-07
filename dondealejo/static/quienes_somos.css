@@ -26,12 +26,37 @@
 .content h2 {
     margin-bottom: 1rem;
     font-size: 1.8rem;
+    color: black;
+    font-weight: bold;
 }
 
 .content p {
     font-size: 1rem;
     line-height: 1.8;
-    color: #555;
+    color: #000000;
+    text-align: justify;
+}
+
+.image {
+    width: 150px;
+    max-width: 400px;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.668)
+}
+
+.integrantes{
+    width: 237px;
+    max-width: 400px;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.668)
+}
+
+/* Animación cuando se muestra en pantalla */
+.fade-in.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .map-container {

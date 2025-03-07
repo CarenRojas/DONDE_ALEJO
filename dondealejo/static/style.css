@@ -213,3 +213,31 @@ footer {
     height: 40px;
     height: 40px;
 }
+
+
+/* boton usuario */
+
+.user-dropdown {
+    background-color: black !important;
+    border: none;
+    padding: 10px;
+}
+
+.user-dropdown:hover,
+.user-dropdown:focus {
+    background-color: black !important;
+}
+
+.user-dropdown::after {
+    display: block;
+    margin: auto;
+    content: "▼";
+    font-size: 10px;
+    color: white;
+}
+
+.dropdown-menu {
+    right: 50% !important;
+    transform: translateX(50%);
+    min-width: 180px;
+}

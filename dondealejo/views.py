@@ -601,3 +601,45 @@ def reservar(request):
         form = ReservaForm()
     
     return render(request, 'reservar.html', {'form': form})
+
+
+
+#sugerencias
+
+from django.shortcuts import render
+from django.core.mail import send_mail
+from django.conf import settings
+from .models import Sugerencia
+
+def sugerencias_view(request):
+    mensaje_exito = None
+
+    if request.method == "POST":
+        nombre = request.POST.get("nombre")
+        correo = request.POST.get("correo")
+        mensaje = request.POST.get("mensaje")
+
+        # Guardar en la base de datos
+        Sugerencia.objects.create(nombre=nombre, correo=correo, mensaje=mensaje)
+
+        # Enviar correo al dueño
+        send_mail(
+            subject=f"Nueva sugerencia de {nombre}",
+            message=f"Nombre: {nombre}\nCorreo: {correo}\nMensaje:\n{mensaje}",
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=["carenrojas212005@gmail.com"],  # Reemplaza con el correo del dueño
+            fail_silently=False,
+        )
+
+        # Enviar correo de agradecimiento al cliente
+        send_mail(
+            subject="¡Gracias por tu sugerencia!",
+            message=f"Hola {nombre},\n\nGracias por enviarnos tu sugerencia. La valoramos mucho y la tendremos en cuenta.\n\nAtentamente,\nEl equipo de Donde Alejo",
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[correo],
+            fail_silently=False,
+        )
+
+        mensaje_exito = "¡Gracias por tu sugerencia! Ha sido enviada correctamente."
+
+    return render(request, "sugerencias.html", {"mensaje_exito": mensaje_exito})

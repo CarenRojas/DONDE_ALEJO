@@ -4,71 +4,103 @@ body {
 	background-repeat: no-repeat; 
 }
 
+/* Contenedor con animación */
 .container {
-    background-color: rgba(255, 255, 255, 0.596); /* Fondo blanco con transparencia */
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 600px;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
     margin: auto;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 h2 {
-    color: #000000;
+    color: #000;
     text-align: center;
     font-weight: bold;
-    font-size: 2.6rem;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
 }
 
-/* Estilos para el formulario */
+/* Formulario y campos */
 form {
     display: flex;
     flex-direction: column;
+    color: black;
 }
 
-/* Estilos para los inputs y textarea */
+/* Inputs y textarea con transiciones */
 input, textarea, button {
-    margin: 5px 0;
-    padding: 12px;
+    margin: 8px 0;
+    padding: 14px;
     font-size: 16px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 8px;
     width: 100%;
+    transition: all 0.3s ease-in-out;
 }
 
-/* Ajustar tamaño del campo de mensaje */
-textarea {
-    height: 60px; /* Reducimos el tamaño del campo */
-    resize: none;
+/* Efecto al enfocar los inputs */
+input:focus, textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+    outline: none;
 }
 
-/* Agregar placeholder en los campos */
+/* Placeholder estilizado */
 input::placeholder, textarea::placeholder {
     color: #888;
 }
 
-/* Botón de enviar */
+/* Área de mensaje */
+textarea {
+    height: 80px;
+    resize: none;
+}
+
+/* Botón con animación */
 button {
-    background-color: #ba0000;
+    background-color: #000;
     color: white;
     cursor: pointer;
     font-size: 18px;
-    padding: 12px;
+    padding: 14px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     margin-top: 10px;
+    transition: background 0.3s, transform 0.2s;
 }
 
+/* Efecto hover y clic en botón */
 button:hover {
-    background-color: #ba0000;
+    background-color: #333;
+}
+
+button:active {
+    transform: scale(0.95);
 }
 
 /* Mensajes de éxito y error */
 .message {
-    padding: 10px;
-    border-radius: 5px;
+    padding: 12px;
+    border-radius: 8px;
     margin-bottom: 10px;
     font-weight: bold;
+    text-align: center;
 }
 
 .success {
@@ -81,4 +113,21 @@ button:hover {
     background-color: #f8d7da;
     color: #721c24;
     border: 1px solid #f5c6cb;
+}
+
+/* Hacerlo responsive */
+@media (max-width: 768px) {
+    .container {
+        max-width: 90%;
+        padding: 20px;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    input, textarea, button {
+        font-size: 15px;
+        padding: 12px;
+    }
 }

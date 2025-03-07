@@ -30,7 +30,7 @@
                             <button type="button" class="btn btn-custom dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 Menú
                             </button>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="{% url 'desayunos' %}">Desayunos</a></li>
                                 <li><a class="dropdown-item" href="{% url 'almuerzo' %}">Almuerzos</a></li>
                                 <li><a class="dropdown-item" href="{% url 'cafeteria' %}">Cafetería</a></li>
@@ -53,13 +53,14 @@
                         {% endif %}
                     {% endwith %}
 
-                    <div class="user-name">
-                        <ul>
-                            <li>
-                                <a href="{% url 'perfil' %}" class="user">
-                                    <img src="{% static 'img/perfil.png' %}" alt="Usuario">
-                                </a>
-                            </li>
+                    <div class="dropdown">
+                        <a class="btn dropdown-toggle user-dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{% static 'img/perfil.png' %}" alt="Usuario">
+                        </a>
+                    
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="{% url 'perfil' %}">Perfil Usuario</a></li>
+                            <li><a class="dropdown-item" href="{% url 'home' %}">Cerrar sesión</a></li>
                         </ul>
                     </div>
 
@@ -82,9 +83,9 @@
     <footer>
         <div class="caja">
             <h3>Donde Alejo</h3>
-            <p class="footer-description">Sabor que inspira, tradición que une.</p>
             <div class="footer-contact">
-                <p>📍 Carrera 9 con calle 8 - Esquina - Barrio el centro</p>
+                <p>📍 Calle 8 con carrera 9- Esquina</p>
+                <p>diagonal antiguo colegio cooperativo</p>
                 <p>📞 312 453 3122</p>
             </div>
         </div>
@@ -93,6 +94,7 @@
             <h4>Horarios:</h4>
             <p>Lunes a Viernes: 8:00 AM - 9:00 PM</p>
             <p>Sábados y Domingos: 12:00 PM - 11:00 PM</p>
+           
         </div>
 
         <div class="caja_logos">
