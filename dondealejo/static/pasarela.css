@@ -1,15 +1,32 @@
+
+/* :root {
+    --pastel-azul: #A7C7E7;
+    --pastel-rosa: #F8C8DC;
+    --pastel-verde: #B7E4C7;
+    --pastel-amarillo: #FFF2B2;
+    --negro: #000;
+} */
+
+
 .checkout-container {
+    /* background-color: #FFF2B2; */
     max-width: 1200px;
     margin: 5rem auto;
     padding: 0 2rem;
+    animation: fadeIn 1s ease-in-out;
 }
+
 
 .checkout-titulo {
     text-align: center;
-    color: var(--primario-oscuro);
+    color: black;
     font-size: 2.5rem;
     margin-bottom: 3rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
+
 
 .checkout-grid {
     display: grid;
@@ -17,54 +34,71 @@
     gap: 2rem;
 }
 
+
 .checkout-form {
-    background-color: white;
+    background-color: #FFF2B2;
     padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
 }
 
 .checkout-resumen {
-    background-color: white;
+    background-color: #FFF2B2;
     padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
 }
 
-.form-group {
-    margin-bottom: 1.5rem;
+.checkout-form:hover, .checkout-resumen:hover {
+    transform: scale(1.02);
 }
+
 
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: var(--primario-oscuro);
+    font-weight: bold;
+    color: black;
 }
+
 
 .form-control {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 8px;
     font-size: 1rem;
+    transition: all 0.3s ease-in-out;
 }
+
+
+.form-control:focus {
+    border-color: var(--pastel-azul);
+    box-shadow: 0 0 10px rgba(167, 199, 231, 0.6);
+    outline: none;
+}
+
 
 .resumen-titulo {
     font-size: 1.5rem;
+    font-weight: bold;
     margin-bottom: 1.5rem;
-    color: var(--primario-oscuro);
-    border-bottom: 1px solid #eee;
+    color: black;
+    border-bottom: 2px solid var(--pastel-azul);
     padding-bottom: 0.5rem;
 }
+
 
 .resumen-item {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--pastel-verde);
 }
+
 
 .resumen-producto {
     display: flex;
@@ -76,17 +110,96 @@
     width: 50px;
     height: 50px;
     object-fit: cover;
-    border-radius: 4px;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
 }
 
+
+.resumen-imagen:hover {
+    transform: scale(1.1);
+}
+
+
 .resumen-total {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: bold;
     text-align: right;
     margin-top: 1.5rem;
     padding-top: 1rem;
-    border-top: 2px solid #f0f0f0;
+    border-top: 3px solid var(--pastel-verde);
+    color: black;
 }
+
+
+button {
+    font-weight: bold;
+    background-color: var(--negro);
+    color: white;
+    font-size: 1.2rem;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+
+button:hover {
+    background-color: #000000;
+    transform: scale(1.05);
+}
+
+
+.btn-outline {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    background-color: black;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    transition: all 0.3s ease-in-out;
+}
+
+
+.btn-outline:hover {
+    background-color: black;
+    color: white;
+}
+
+button, .btn-success {
+    background-color: #000; /* Negro */
+    color: white;
+    font-size: 1.2rem;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Efecto Hover en Botón */
+button:hover, .btn-success:hover {
+    background-color: #000000; /* Negro más claro */
+    transform: scale(1.05);
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 @media (max-width: 768px) {
     .checkout-grid {
@@ -96,5 +209,28 @@
     .checkout-titulo {
         font-size: 2rem;
         margin-bottom: 2rem;
+    }
+
+    .checkout-form, .checkout-resumen {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .checkout-container {
+        padding: 0 1rem;
+    }
+
+    .checkout-titulo {
+        font-size: 1.8rem;
+    }
+
+    .checkout-form, .checkout-resumen {
+        padding: 1rem;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 12px;
     }
 }

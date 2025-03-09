@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restablecer Contraseña</title>
     <link rel="stylesheet" href="{% static 'restablecer.css' %}">
-
 </head>
 <body>
     <div class="container">
@@ -24,9 +23,11 @@
         <form action="{% url 'restablecer' %}" method="POST">
             {% csrf_token %}
             <input type="email" name="email" placeholder="Correo electrónico" required>
+            <br>
+            <br>
             <button type="submit">Enviar enlace</button>
         </form>
-        
+        <br>
         <p class="login-link">¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión</a></p>
     </div>
 </body>

@@ -138,7 +138,7 @@ from django.utils.encoding import force_bytes, force_str
 
 def restablecer(request):
     if request.method == "POST":
-        email = request.POST.get("email")
+        email = request.POST("email")
         user = User.objects.filter(email=email).first()
         if user:
             token = default_token_generator.make_token(user)
@@ -146,7 +146,7 @@ def restablecer(request):
             enlace = request.build_absolute_uri(f"/cambiar_contrasena/{uid}/{token}/")
             send_mail(
                 'Restablecer contraseña',
-                f'Haz clic en el siguiente en enlace para restablecer tu contraseña {enlace}',
+                f'Haz clic en el siguiente en enlace para cambiar tu contraseña {enlace}',
                 'carenrojas212005@gmail.com',
                 [email], 
                 fail_silently=False
@@ -156,7 +156,10 @@ def restablecer(request):
         else:
             messages.success(request, "No se encontro algun usuario registrado con ese correo")
         return redirect('restablecer')
-    return render(request, 'email_restablecer.html')
+    return render(request, 'restablecer.html')
+
+
+
 
 def cambiar_contrasena(request, uidb64, token):
     try:
@@ -168,23 +171,15 @@ def cambiar_contrasena(request, uidb64, token):
     if user and default_token_generator.check_token(user, token):
         if request.method == "POST":
             nueva_contrasena = request.POST.get("password")
-            
-            if not nueva_contrasena:
-                messages.error(request, "La contraseña no puede estar vacía")
-                return render(request, "email_contrasena.html")
-                
-            
             user.set_password(nueva_contrasena)
             user.save()
-            
-            return redirect('confirmacion_contrasena')
+            return redirect('password_changed')
         
-        return render(request, "email_contrasena.html")
+        return render(request, "cambiar_contraseña.html")
     return redirect("login")
 
-def confirmacion_contrasena(request):
-    return render(request, "cambio_contrasena.html")
-
+def password_changed(request):
+    return render(request, "password_changed.html")
 
 def home (request):
     return render(request, 'home.html')

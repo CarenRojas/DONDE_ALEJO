@@ -1,7 +1,9 @@
 /* Estilos generales */
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)), url('/static/img/fondo-login.jpg'); 
+	background-size: 100% 100%;
+	background-repeat: no-repeat; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,29 +13,31 @@ body {
 
 /* Contenedor del formulario */
 .container {
-    background: white;
+    background-color: rgba(255, 255, 255, 0.2);
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 350px;
+    width: 450px;
+    box-shadow: 0px 0px 10px rgb(255, 255, 255);
 }
 
 /* Título */
 h2 {
-    color: #333;
+    color: #ffffff;
     margin-bottom: 15px;
+    font-size: 2.5rem;
 }
 
 /* Texto descriptivo */
 p {
-    font-size: 14px;
-    color: #555;
+    font-size: 18px;
+    color: #ffffff;
 }
 
 /* Campos de entrada */
 input[type="email"] {
-    width: 100%;
+    width: 420px;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
@@ -42,9 +46,9 @@ input[type="email"] {
 
 /* Botón de envío */
 button {
-    width: 100%;
+    width: 300px;
     padding: 10px;
-    background: #6e8efb;
+    background: #000000;
     color: white;
     border: none;
     border-radius: 5px;
@@ -54,7 +58,8 @@ button {
 }
 
 button:hover {
-    background: #5a7be0;
+    background: rgb(165, 100, 14);
+    color: white;
 }
 
 /* Mensajes de Django */
@@ -75,11 +80,11 @@ button:hover {
 /* Enlace de inicio de sesión */
 .login-link {
     margin-top: 15px;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .login-link a {
-    color: #6e8efb;
+    color: rgb(225, 255, 0);
     text-decoration: none;
     font-weight: bold;
 }

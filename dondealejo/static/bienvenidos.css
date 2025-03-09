@@ -1,4 +1,4 @@
-/* Contenedor principal con animación de entrada */
+
 .welcome-container {
     display: flex;
     align-items: center;
@@ -7,9 +7,11 @@
     padding: 50px;
     opacity: 0;
     animation: fadeIn 1.5s ease-in-out forwards;
+    flex-wrap: wrap;
+    text-align: center;
 }
 
-/* Animación de entrada general */
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -21,22 +23,23 @@
     }
 }
 
-/* Contenedor interno alineado */
+
 .contenedor {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 50px;
+    flex-wrap: wrap;
 }
 
-/* Animaciones de entrada separadas para los elementos */
+
 .text-content {
     max-width: 600px;
     opacity: 0;
     animation: fadeInText 2s ease-in-out forwards 0.5s;
 }
 
-/* Animación para el texto */
+
 @keyframes fadeInText {
     from {
         opacity: 0;
@@ -48,30 +51,31 @@
     }
 }
 
-/* Título */
+
 .text-content h1 {
-    font-size: 3.0rem;
+    font-size: 2.5rem;
     color: #000000;
-    margin-bottom: 35px;
+    margin-bottom: 25px;
     text-align: center;
     font-weight: bold;
 }
 
-/* Descripción */
+
 .text-content p {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: #000000;
-    line-height: 2;
+    line-height: 1.8;
     text-align: justify;
+    padding: 0 10px; 
 }
 
-/* Imagen con animación de entrada */
+
 .image-container {
     opacity: 0;
     animation: fadeInImage 2s ease-in-out forwards 1s;
 }
 
-/* Animación para la imagen */
+
 @keyframes fadeInImage {
     from {
         opacity: 0;
@@ -83,7 +87,7 @@
     }
 }
 
-/* Imagen con efecto suave */
+
 .image-container img {
     height: 350px;
     width: 350px;
@@ -92,7 +96,56 @@
     transition: transform 0.3s ease-in-out;
 }
 
-/* Efecto de escala al pasar el mouse */
+
 .image-container img:hover {
     transform: scale(1.05);
+}
+
+
+
+
+@media (max-width: 768px) {
+    .contenedor {
+        flex-direction: column; 
+        text-align: center;
+    }
+
+    .text-content h1 {
+        font-size: 2rem;
+    }
+
+    .text-content p {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+
+    .image-container img {
+        width: 280px;
+        height: 280px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .welcome-container {
+        padding: 20px;
+    }
+
+    .contenedor {
+        flex-direction: column-reverse; 
+    }
+
+    .text-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .text-content p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .image-container img {
+        width: 250px;
+        height: 250px;
+    }
 }

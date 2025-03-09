@@ -19,12 +19,14 @@
     justify-content: center;
 }
 
+
 .days {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 30px; /* Espaciado entre cajas */
+    gap: 30px; 
 }
+
 
 .day {
     background: #D2B48C;
@@ -32,8 +34,8 @@
     border-radius: 15px;
     text-align: center;
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
-    width: 400px;  /* Caja más grande */
-    height: 500px; /* Más altura para la imagen */
+    width: 400px;  
+    height: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -42,13 +44,14 @@
 
 
 .day img {
-    width: 100%; /* Ocupa todo el ancho del contenedor */
-    max-width: 380px; /* Tamaño máximo */
-    height: 400px; /* Imagen más grande */
-    object-fit: cover; /* Ajuste sin deformación */
+    width: 100%;
+    max-width: 380px;
+    height: 400px;
+    object-fit: cover;
     border-radius: 12px;
     box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
 }
+
 
 .day h3 {
     font-size: 1.8rem;
@@ -58,21 +61,6 @@
 }
 
 
-.comida {
-    text-align: center;
-    display: block;
-    width: 100%;
-}
-
-.titulo {
-    font-weight: bold; 
-    font-size: 40px;
-    color: #000000; 
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-/* Botón de pedido */
 .button-container {
     text-align: center;
     margin-top: 20px;
@@ -93,6 +81,70 @@
 }
 
 .btn-domicilio:hover {
-    background-color: #000000;
+    background-color: #333;
     transform: scale(1.05);
+}
+
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .days {
+        gap: 20px;
+    }
+
+    .day {
+        width: 320px;
+        height: auto;
+        padding: 20px;
+    }
+
+    .day img {
+        height: 300px;
+        max-width: 100%;
+    }
+
+    .day h3 {
+        font-size: 1.6rem;
+    }
+
+    .btn-domicilio {
+        font-size: 1.2em;
+        padding: 12px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.8rem;
+        padding: 30px;
+    }
+
+    .days {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .day {
+        width: 90%;
+        height: auto;
+        padding: 15px;
+    }
+
+    .day img {
+        height: 250px;
+    }
+
+    .day h3 {
+        font-size: 1.4rem;
+    }
+
+    .btn-domicilio {
+        font-size: 1.1em;
+        padding: 10px 18px;
+        display: block;
+        margin: 20px auto;
+    }
 }

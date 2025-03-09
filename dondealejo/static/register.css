@@ -1,92 +1,87 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap');
 
-body {
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    /* background: linear-gradient(45deg, #a85a00c9,#ffffffc0 );   */
     background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)), url('/static/img/fondo-login.jpg'); 
 	background-size: 100% 100%;
-	background-repeat: no-repeat;
-}
-main {
-    font-family: Arial, sans-serif;
-    width: 100%;
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 50px;
-    background-color: rgba(255, 255, 255, 0.781);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	background-repeat: no-repeat; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
-/* .caja {
-    background-color: rgba(255, 255, 255, 0.2); /* Fondo blanco con transparencia */
-    /* padding: 20px;
+main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    background-color: rgba(255, 255, 255, 0.466);
     border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Borde semitransparente */
-    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
-    /* width: 400px;
+    box-shadow: 0px 0px 10px rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 60px;  /* Aumentamos el padding */
+
+    width: 90%;
+    max-width: 500px;  /* Aumentamos el tamaño del formulario */
     text-align: center;
-} */
+}
 
 h2 {
-    text-align: center;
+    color: white;
+    font-size: 2.5rem;  /* Aumentamos tamaño del título */
     margin-bottom: 20px;
-    color: rgb(255, 255, 255);
-    font-size: 2.5rem;
 }
 
-form input[type="text"],
-form input[type="email"],
-form input[type="password"] {
+form input {
     width: 100%;
-    padding: 15px;
+    padding: 12px;  /* Aumentamos el padding */
     margin-bottom: 15px;
-    border: 1px solid #dddddd93;;
+    border: none;
     border-radius: 5px;
-}
-
-.password-container {
-    position: relative;
-}
-
-.password-container input[type="password"] {
-    width: 100%;
-    padding-right: 40px;
-}
-
-.password-container .fas {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
+    background: white;
+    font-size: 18px;  /* Aumentamos tamaño de fuente */
 }
 
 button {
     width: 100%;
-    padding: 10px;
-    background-color: #000000;
-    color: rgb(255, 255, 255);
+    padding: 12px;
+    background-color: black;
+    color: white;
     border: none;
     border-radius: 5px;
+    font-size: 18px;  /* Aumentamos tamaño de fuente */
     cursor: pointer;
-    font-size: 16px;
 }
 
 button:hover {
-    background-color: #eeff00;
-    color: rgb(0, 0, 0);
-    transform: scale(1.0);
+    background-color: rgb(165, 100, 14);
+    color: rgb(255, 255, 255);
 }
 
 p {
-    text-align: center;
+    color: white;
     margin-top: 15px;
-    color: rgb(0, 0, 0);
+    font-size: 16px;  /* Aumentamos tamaño del texto */
 }
 
 a {
-    color: #fff200;
+    color: yellow;
     text-decoration: none;
+    font-size: 16px;
 }
 
 a:hover {

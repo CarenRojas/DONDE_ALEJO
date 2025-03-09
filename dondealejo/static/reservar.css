@@ -1,17 +1,23 @@
+/* Fondo de la página */
 body {
-    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)), url('/static/img/fondo-reservar.jpeg'); 
-	background-size: 100% 100%;
-	background-repeat: no-repeat; 
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('/static/img/fondo-reservar.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
 }
 
-/* Contenedor con animación */
+/* Contenedor principal */
 .container {
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: #f1f0dc;
     padding: 25px;
     border-radius: 12px;
     max-width: 500px;
     width: 90%;
-    margin: auto;
+    margin: 50px auto;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     animation: fadeIn 0.8s ease-in-out;
 }
@@ -28,22 +34,23 @@ body {
     }
 }
 
+/* Títulos */
 h2 {
     color: #000;
     text-align: center;
     font-weight: bold;
-    font-size: 2.2rem;
+    font-size: 2rem;
     margin-bottom: 15px;
 }
 
-/* Formulario y campos */
+/* Formulario */
 form {
     display: flex;
     flex-direction: column;
     color: black;
 }
 
-/* Inputs y textarea con transiciones */
+/* Campos de entrada */
 input, textarea, button {
     margin: 8px 0;
     padding: 14px;
@@ -54,25 +61,25 @@ input, textarea, button {
     transition: all 0.3s ease-in-out;
 }
 
-/* Efecto al enfocar los inputs */
+/* Efecto en inputs al enfocar */
 input:focus, textarea:focus {
     border-color: #007bff;
     box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
     outline: none;
 }
 
-/* Placeholder estilizado */
+/* Placeholder */
 input::placeholder, textarea::placeholder {
     color: #888;
 }
 
-/* Área de mensaje */
+/* Área de texto */
 textarea {
-    height: 80px;
+    height: 100px;
     resize: none;
 }
 
-/* Botón con animación */
+/* Botón */
 button {
     background-color: #000;
     color: white;
@@ -85,7 +92,7 @@ button {
     transition: background 0.3s, transform 0.2s;
 }
 
-/* Efecto hover y clic en botón */
+/* Efectos en botón */
 button:hover {
     background-color: #333;
 }
@@ -115,19 +122,38 @@ button:active {
     border: 1px solid #f5c6cb;
 }
 
-/* Hacerlo responsive */
+/* ---------------- RESPONSIVE ---------------- */
+
+/* Ajustes para tablets */
 @media (max-width: 768px) {
     .container {
-        max-width: 90%;
+        width: 95%;
         padding: 20px;
     }
-    
+
     h2 {
         font-size: 1.8rem;
     }
     
     input, textarea, button {
-        font-size: 15px;
+        font-size: 16px;
         padding: 12px;
+    }
+}
+
+/* Ajustes para celulares */
+@media (max-width: 480px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    input, textarea, button {
+        font-size: 14px;
+        padding: 10px;
     }
 }
