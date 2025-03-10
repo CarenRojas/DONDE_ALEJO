@@ -584,7 +584,7 @@ def reservar(request):
             
             try:
                 form.send_mail()
-                messages.success(request, "Tu reserva ha sido realizada con éxito. Te hemos enviado un correo de confirmación.")
+                messages.success(request, "Tu reserva ha sido realizada con éxito.")
             except Exception as e:
                 print(f"Error al enviar correo: {e}")
                 messages.success(request, "Tu reserva ha sido realizada con éxito.")

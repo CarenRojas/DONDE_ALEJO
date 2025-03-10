@@ -1,50 +1,86 @@
 body {
     background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)), url('/static/img/fondo_inicio.jpeg'); 
-	background-size: 100% 90%;
-	background-repeat: no-repeat; 
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    transition: background-size 1s ease-in-out; /* Transición suave del fondo */
 }
+
 form {
     max-width: 500px;
     margin: auto;
-    background-color: rgba(255, 255, 255, 0.647);
+    background-color: #f1f0dc;
     padding: 20px;
     border-radius: 10px;
+    transition: all 0.3s ease-in-out; /* Transición suave al formulario */
 }
 
+/* Efecto de entrada */
+form:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+    color: black;
+    font-weight: bold;
+}
 
 h2 {
     color: rgb(0, 0, 0);
     font-weight: bold;
     font-size: 2.4rem;
     text-align: center;
+    transition: color 0.3s ease-in-out;
 }
+
+/* Transición en los inputs */
 input, textarea {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ddd;
     border-radius: 5px;
+    transition: all 0.3s ease-in-out; /* Suavizado al interactuar */
 }
+
+/* Efecto al enfocar */
+input:focus, textarea:focus {
+    border-color: #A20000;
+    box-shadow: 0 0 8px rgba(162, 0, 0, 0.5);
+    transform: scale(1.02);
+}
+
+/* Centrar el botón */
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
 button {
-    background:#A20000;
+    background: #A20000;
     color: white;
-    padding: 10px;
+    padding: 10px 20px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease-in-out; /* Transición al botón */
 }
+
+/* Efecto hover en el botón */
 button:hover {
-    background: #A20000;
+    background: #820000;
+    transform: scale(1.05);
 }
 
-
-
-.alert {
+/* Efectos en los mensajes */
+.alert, .success-message, .error-message {
     padding: 10px;
     margin: 10px 0;
     border-radius: 5px;
     font-weight: bold;
     text-align: center;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .alert-success {
@@ -59,19 +95,14 @@ button:hover {
     border: 1px solid #f5c6cb;
 }
 
-
-.success-message {
-    background-color: #d4edda;
-    color: #155724;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
+/* Desvanecer los mensajes después de 3 segundos */
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
 }
 
-.error-message {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
+.success-message, .error-message {
+    animation: fadeOut 3s ease-in-out 3s forwards;
 }
+
+
