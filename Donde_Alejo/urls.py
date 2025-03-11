@@ -33,7 +33,6 @@ urlpatterns = [
     path("solicitar_domicilio/", views.solicitar_domicilio, name="solicitar_domicilio"),
     path("domicilios", views.solicitar_domicilio, name="domicilios"),
     path('cafeteria', views.cafeteria, name='cafeteria'),
-    path("sugerencias/", views.sugerencias_view, name="sugerencias"),
     path('quienes_somos', views.quienes_somos, name='quienes_somos'),
     path('reservar', views.reservar, name='reservar'),
     path('register', views.register, name='register'),

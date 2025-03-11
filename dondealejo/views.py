@@ -8,7 +8,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
-
+from .models import Sugerencia
 from dondealejo import views
 
 
@@ -138,7 +138,7 @@ from django.utils.encoding import force_bytes, force_str
 
 def restablecer(request):
     if request.method == "POST":
-        email = request.POST("email")
+        email = request.POST.get("email")
         user = User.objects.filter(email=email).first()
         if user:
             token = default_token_generator.make_token(user)
@@ -440,51 +440,44 @@ def perfil(request):
 
 
 
-#sugerencia
+#
 from django.shortcuts import render
 from django.core.mail import send_mail
 from django.contrib import messages
 from .forms import SugerenciaForm
 
-def buzon_sugerencias(request):
-    success = False
+
+def quienes_somos(request):
+    mensaje_exito = None
 
     if request.method == "POST":
-        form = SugerenciaForm(request.POST)
-        if form.is_valid():
-            sugerencia = form.save()
+        nombre = request.POST.get("nombre")
+        correo = request.POST.get("correo")
+        mensaje = request.POST.get("mensaje")
 
-            try:
-                from django.conf import settings
-                
-                send_mail(
-                    "Nueva Sugerencia Recibida",
-                    f"Nombre: {sugerencia.nombre}\nCorreo: {sugerencia.email}\n\nMensaje:\n{sugerencia.mensaje}",
-                    settings.EMAIL_HOST_USER,  
-                    ["rojaskaren2105@gmail.com"],  
-                    fail_silently=False,
-                )
-                
-                send_mail(
-                    "Gracias por tu sugerencia",
-                    f"Hola {sugerencia.nombre},\n\nGracias por tu sugerencia. La tendremos en cuenta.",
-                    settings.EMAIL_HOST_USER,
-                    [sugerencia.email],
-                    fail_silently=False,
-                )
-                
-                success = True
-                messages.success(request, "¡Tu sugerencia ha sido enviada exitosamente!")
-            except Exception as e:
-                print(f"Error al enviar correo: {e}")  # Log del error
-                messages.error(request, f"Error al enviar el correo: {e}")
-        else:
-            messages.error(request, "Error al enviar la sugerencia. Inténtalo de nuevo.")
-    else:
-        form = SugerenciaForm()
+        try:
+            send_mail(
+                subject=f"Nueva sugerencia de {nombre}",
+                message=f"Nombre: {nombre}\nCorreo: {correo}\nMensaje:\n{mensaje}",
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=["carenrojas212005@gmail.com"],
+                fail_silently=False,
+            )
 
-    return render(request, "quienes_somos.html", {"form": form, "success": success})
+            send_mail(
+                subject="¡Gracias por tu sugerencia!",
+                message=f"Hola {nombre},\n\nGracias por enviarnos tu sugerencia. La valoramos mucho y la tendremos en cuenta.\n\nAtentamente,\nEl equipo de Donde Alejo",
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[correo],
+                fail_silently=False,
+            )
+            
+            mensaje_exito = "¡Gracias por tu sugerencia! Ha sido enviada correctamente."
+        except Exception as e:
+            print(f"Error al enviar correo: {e}") 
+            mensaje_exito = "Ha ocurrido un error al procesar tu sugerencia. Inténtalo de nuevo más tarde."
 
+    return render(request, "quienes_somos.html", {"mensaje_exito": mensaje_exito})
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -605,36 +598,3 @@ from django.shortcuts import render
 from django.core.mail import send_mail
 from django.conf import settings
 from .models import Sugerencia
-
-def sugerencias_view(request):
-    mensaje_exito = None
-
-    if request.method == "POST":
-        nombre = request.POST.get("nombre")
-        correo = request.POST.get("correo")
-        mensaje = request.POST.get("mensaje")
-
-        # Guardar en la base de datos
-        Sugerencia.objects.create(nombre=nombre, correo=correo, mensaje=mensaje)
-
-        # Enviar correo al dueño
-        send_mail(
-            subject=f"Nueva sugerencia de {nombre}",
-            message=f"Nombre: {nombre}\nCorreo: {correo}\nMensaje:\n{mensaje}",
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=["carenrojas212005@gmail.com"],  # Reemplaza con el correo del dueño
-            fail_silently=False,
-        )
-
-        # Enviar correo de agradecimiento al cliente
-        send_mail(
-            subject="¡Gracias por tu sugerencia!",
-            message=f"Hola {nombre},\n\nGracias por enviarnos tu sugerencia. La valoramos mucho y la tendremos en cuenta.\n\nAtentamente,\nEl equipo de Donde Alejo",
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[correo],
-            fail_silently=False,
-        )
-
-        mensaje_exito = "¡Gracias por tu sugerencia! Ha sido enviada correctamente."
-
-    return render(request, "sugerencias.html", {"mensaje_exito": mensaje_exito})

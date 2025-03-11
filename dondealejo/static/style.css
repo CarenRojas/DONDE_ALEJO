@@ -1,305 +1,357 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap');
 
-
 body {
     margin: 0;
     padding: 0;
     line-height: 1.6;
     color: #333;
-    /* background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)), url('/static/img/4.jpg'); 
-	background-size: 100% 100vh;
-	background-repeat: no-repeat;  */
     font-family: 'Montserrat Alternates', sans-serif;
+    overflow-x: hidden;
 }
 
-.header {
-    width: 100vw;
-    height: 50%;
+/* CABECERA */
+.alejo-cabecera {
+    width: 100%;
     background: #000000;
     color: #ffffff;
     padding: 1rem 0;
-    box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.668)
+    box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.668);
+    position: relative;
 }
 
-.header-content {
+.alejo-cabecera-contenido {
     display: flex;
     justify-content: space-between;
     margin: 0 80px;
     align-items: center;
-    flex-wrap: wrap;
+    position: relative;
     font-size: 1.2rem;
 }
 
-.logo {
+.alejo-logo {
     height: 130px;
     width: auto;
     border-radius: 90px;
-    /* box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.88)
-     */
 }
-.logo-texto {
+
+.alejo-logo-texto {
     display: flex;
     gap: 20px;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
+    z-index: 10;
 }
 
-.logo-texto h1 {
-   color: rgb(255, 255, 255);
-   font-family: 'Montserrat Alternates', sans-serif;
-   font-weight: bold;
+.alejo-logo-texto h1 {
+    color: rgb(255, 255, 255);
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: bold;
 }
 
-.nav, .dropdown-btn{
+/* NAVEGACIÓN */
+.alejo-nav-lista {
     list-style: none;
-    padding: 30px;
+    padding: 0;
+    margin: 0;
     display: flex;
-    gap: 2rem;
 }
 
-.nav a {
+.alejo-barra-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.alejo-enlace {
     font-size: 1.2rem;
     color: #ffffff;
     text-decoration: none;
     font-weight: bold;
+    transition: color 0.3s ease;
+    display: inline-block;
+    padding: 10px 0;
 }
 
-/* .carro {
-
-} */
-
-
-
-.dropdown:hover .dropdown-content {
-    display: block;
+.alejo-enlace:hover {
+    color: #cccccc;
+    text-decoration: none;
 }
 
-
-.cerrar {
-    width: 10%;
-    height: 10%;
-
-}
-
-.navbar {
-    display: flex;
-    align-items: center; /* Alinea verticalmente los elementos */
-    gap: 20px; /* Espacio entre elementos */
-}
-
-.btn-custom {
-    background-color: transparent !important; /* Fondo transparente */
-    color: white !important; /* Texto blanco */
-    border: none !important; /* Sin bordes */
-    padding: 8px 16px;
+/* BOTONES Y MENÚS */
+.alejo-boton-menu {
+    background-color: transparent !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 16px !important;
     font-size: 1.2rem;
-    transition: color 0.3s ease-in-out;
     font-weight: bold;
+    transition: color 0.3s ease-in-out;
 }
 
-
-
-/* Estilos del menú desplegable */
-.dropdown-menu {
-    background-color: white !important; /* Fondo blanco */
+.alejo-dropdown-menu {
+    background-color: white !important;
     border-radius: 10px;
+    z-index: 1100;
 }
 
-.dropdown-item {
-    color: black !important; /* Texto negro */
+.alejo-item-menu {
+    color: black !important;
+    text-decoration: none;
+    display: block;
+    padding: 8px 16px;
 }
 
-.dropdown-item:hover {
-    background-color: black !important; /* Fondo negro al pasar el mouse */
-    color: white !important; /* Texto blanco */
+.alejo-item-menu:hover {
+    background-color: black !important;
+    color: white !important;
+    text-decoration: none;
 }
 
+/* CARRITO */
+.alejo-carrito-img {
+    height: 40px;
+    width: 40px;
+}
 
-footer {
+.alejo-carrito-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* USUARIO */
+.alejo-usuario-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.alejo-usuario-btn {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 10px !important;
+    display: flex;
+    align-items: center;
+}
+
+.alejo-usuario-btn:hover,
+.alejo-usuario-btn:focus {
+    background-color: transparent !important;
+}
+
+.alejo-usuario-img {
+    width: 30px;
+    height: 30px;
+}
+
+.alejo-usuario-btn::after {
+    content: "" !important;
+    margin-left: 5px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    border-top: 5px solid #fff;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+}
+
+.alejo-menu-usuario {
+    right: 0 !important;
+    left: auto !important;
+    transform: none !important;
+    min-width: 180px;
+    z-index: 1100;
+}
+
+/* HAMBURGUESA MÓVIL */
+.alejo-boton-hamburguesa {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 24px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+}
+
+.alejo-boton-cerrar {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1002;
+}
+
+.alejo-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 998;
+}
+
+/* FOOTER */
+.alejo-footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    padding: 10px;
+    padding: 20px 10px;
     background: #000000;
     color: white;
 }
 
-.caja {
+.alejo-footer-box {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 2px;
+    margin: 10px;
     text-align: center;
 }
 
-.caja_logos img{
+.alejo-contacto {
+    text-align: center;
+}
+
+.alejo-footer-social {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    text-align: center;
+}
+
+.alejo-footer-social img {
     width: 50px;
     height: 50px;
-    margin: 2px;
-    
+    margin: 5px;
 }
 
-.text p {
-    margin: 5px 0;
-    font-size: 14px;
-    /* color: white; */
-    text-align: center;
-}
-
-.icons {
+.alejo-social-icons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
     margin-top: 10px;
 }
 
-.icons a {
-    margin: 0 10px;
+/* RESPONSIVE */
+@media (max-width: 1076px) {
+    .alejo-cabecera-contenido {
+        margin: 0 40px;
+    }
+    
+    .alejo-logo {
+        height: 100px;
+    }
 }
 
-.icons img {
-    width: 20px;
-    height: 20px;
-    transition: transform 0.3s;
-    justify-content: endx;
+@media (max-width: 912px) {
+    .alejo-cabecera-contenido {
+        margin: 0 30px;
+    }
+    
+    .alejo-logo {
+        height: 80px;
+    }
+    
+    .alejo-logo-texto h1 {
+        font-size: 1.5rem;
+    }
 }
 
-.btn {
-    background-color: #ffffff;
-}
-
-.dropdown {
-    font-family: 'Montserrat Alternates', sans-serif;
-    position: relative;
-    display: flex;
-}
-
-.boton {
-    border-radius: 10px;
-    background-color: #743206;
-    color: white;
-}
-
-.dropdown-content a {
-    /* color: black; */
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-/* .dropdown-content a :hover {
-    background-color: #f1f1f1;
-} */
-
-.dropdown :hover .dropdown-content {
-    display: block;
-}
-
-
-.carrito {
-    height: 40px;
-    height: 40px;
-}
-
-
-.user-name ul {
-    list-style: none; 
-    padding: 0;
-    margin: 0;
-}
-
-.user-name li {
-    display: inline-block; 
-}
-
-.user-name img {
-    height: 40px;
-    height: 40px;
-}
-
-
-/* boton usuario */
-
-.user-dropdown {
-    background-color: black !important;
-    border: none;
-    padding: 10px;
-}
-
-.user-dropdown:hover,
-.user-dropdown:focus {
-    background-color: black !important;
-}
-
-.user-dropdown::after {
-    display: block;
-    margin: auto;
-    content: "▼";
-    font-size: 10px;
-    color: white;
-}
-
-.dropdown-menu {
-    right: 50% !important;
-    transform: translateX(50%);
-    min-width: 180px;
-}
-
-
-.btn-menu-responsive {
-    display: none; /* Oculto en pantallas grandes */
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 1000;
-}
-
-.btn-menu-responsive img {
-    width: 40px;
-    height: 40px;
-}
-
-/* Estilos para el modal */
-.modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1001;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    width: 300px;
-}
-
-.modal-content ul {
-    list-style: none;
-    padding: 0;
-}
-
-.modal-content ul li {
-    margin: 10px 0;
-}
-
-.close {
-    cursor: pointer;
-    font-size: 24px;
-    float: right;
-}
-
-/* Mostrar el botón solo en pantallas pequeñas */
 @media (max-width: 768px) {
-    .btn-menu-responsive {
+    .alejo-boton-hamburguesa {
         display: block;
+    }
+    
+    .alejo-barra-nav {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.95);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+        padding: 50px 20px;
+    }
+    
+    .alejo-barra-nav.activo {
+        display: flex;
+    }
+    
+    .alejo-boton-cerrar {
+        display: block;
+    }
+    
+    .alejo-enlace, 
+    .alejo-usuario-dropdown,
+    .alejo-carrito-link,
+    .alejo-grupo-botones {
+        margin: 15px 0;
+    }
+    
+    .alejo-footer {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .alejo-footer-box, 
+    .alejo-footer-social {
+        margin: 15px 0;
+        width: 100%;
+    }
+    
+    .alejo-overlay.activo {
+        display: block;
+    }
+}
+
+@media (max-width: 576px) {
+    .alejo-cabecera-contenido {
+        margin: 0 15px;
+        justify-content: center;
+        position: relative;
+    }
+    
+    .alejo-logo {
+        height: 60px;
+    }
+    
+    .alejo-logo-texto {
+        gap: 10px;
+    }
+    
+    .alejo-logo-texto h1 {
+        font-size: 1rem;
+    }
+    
+    .alejo-boton-hamburguesa {
+        right: 15px;
+    }
+}
+
+@media (max-width: 520px) {
+    .alejo-cabecera-contenido {
+        justify-content: flex-start;
+    }
+    
+    .alejo-boton-hamburguesa {
+        right: 15px;
     }
 }

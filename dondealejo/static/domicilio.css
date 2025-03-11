@@ -1,108 +1,190 @@
-body {
-    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)), url('/static/img/fondo_inicio.jpeg'); 
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    transition: background-size 1s ease-in-out; /* Transición suave del fondo */
+.domicilio-container {
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.7)), url('/static/img/fondo_inicio.jpeg'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.domicilio-container.loaded {
+    opacity: 1;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 40px auto;
+}
+
+.messages-container {
+    margin-bottom: 20px;
 }
 
 form {
-    max-width: 500px;
-    margin: auto;
+    width: 100%;
     background-color: #f1f0dc;
-    padding: 20px;
-    border-radius: 10px;
-    transition: all 0.3s ease-in-out; /* Transición suave al formulario */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
 }
 
-/* Efecto de entrada */
 form:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.form-group {
-    color: black;
-    font-weight: bold;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
 }
 
 h2 {
-    color: rgb(0, 0, 0);
+    color: #000;
     font-weight: bold;
-    font-size: 2.4rem;
+    font-size: 2.2rem;
     text-align: center;
+    margin-bottom: 25px;
     transition: color 0.3s ease-in-out;
 }
 
-/* Transición en los inputs */
-input, textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    transition: all 0.3s ease-in-out; /* Suavizado al interactuar */
+.form-group {
+    margin-bottom: 20px;
 }
 
-/* Efecto al enfocar */
+label {
+    display: block;
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease-in-out;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
 input:focus, textarea:focus {
     border-color: #A20000;
     box-shadow: 0 0 8px rgba(162, 0, 0, 0.5);
-    transform: scale(1.02);
+    outline: none;
+    transform: scale(1.01);
 }
 
-/* Centrar el botón */
 .button-container {
     display: flex;
     justify-content: center;
+    margin-top: 25px;
 }
 
 button {
     background: #A20000;
     color: white;
-    padding: 10px 20px;
+    padding: 12px 30px;
     border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
     cursor: pointer;
-    border-radius: 5px;
-    font-size: 1.1rem;
-    transition: all 0.3s ease-in-out; /* Transición al botón */
+    transition: all 0.3s ease-in-out;
 }
 
-/* Efecto hover en el botón */
 button:hover {
     background: #820000;
     transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(130, 0, 0, 0.3);
 }
 
-/* Efectos en los mensajes */
-.alert, .success-message, .error-message {
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
+.success-message, .error-message, .warning-message {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
     font-weight: bold;
     text-align: center;
     transition: opacity 0.5s ease-in-out;
 }
 
-.alert-success {
+.success-message {
     background-color: #d4edda;
     color: #155724;
     border: 1px solid #c3e6cb;
 }
 
-.alert-error {
+.error-message {
     background-color: #f8d7da;
     color: #721c24;
     border: 1px solid #f5c6cb;
 }
 
-/* Desvanecer los mensajes después de 3 segundos */
+.warning-message {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
 @keyframes fadeOut {
     0% { opacity: 1; }
+    90% { opacity: 1; }
     100% { opacity: 0; }
 }
 
-.success-message, .error-message {
-    animation: fadeOut 3s ease-in-out 3s forwards;
+.success-message, .error-message, .warning-message {
+    animation: fadeOut 5s ease-in-out forwards;
 }
 
+@media (max-width: 768px) {
+    form {
+        padding: 20px;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    input, textarea, button {
+        font-size: 1rem;
+    }
+}
 
+@media (max-width: 480px) {
+    .form-container {
+        margin: 20px auto;
+    }
+    
+    form {
+        padding: 15px;
+    }
+    
+    h2 {
+        font-size: 1.6rem;
+        margin-bottom: 15px;
+    }
+    
+    label {
+        font-size: 0.9rem;
+    }
+    
+    input, textarea {
+        padding: 10px;
+    }
+    
+    button {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+}
