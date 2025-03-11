@@ -2,26 +2,28 @@
     max-width: 600px;
     margin: 40px auto;
     padding: 20px;
-    background: #FFF2B2;
+    background: #ece8d0;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     margin-top: 100px;
 }
 
+/* Tarjeta de perfil */
 .profile-card {
     padding: 20px;
 }
 
+/* Imagen de perfil */
 .profile-photo {
     width: 120px;
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 10px;
-    
 }
 
+/* Lista de información */
 .profile-card ul {
     list-style: none;
     padding: 0;
@@ -33,10 +35,12 @@
     color: black;
 }
 
+/* Acciones del perfil */
 .profile-actions {
     margin-top: 20px;
 }
 
+/* Botones */
 .btn {
     display: inline-block;
     padding: 10px 15px;
@@ -51,13 +55,69 @@
     color: white;
 }
 
+/* Imagen de perfil en menú o icono */
 .perfil-imagen {
     width: 60px;
     height: 60px;
-} 
+}
 
+/* Nombre de usuario */
 .usuario {
     color: black;
     font-weight: bold;
     font-size: 40px;
+}
+
+/* 📱 Estilos para Tablets y Celulares */
+@media (max-width: 768px) { /* Tablets */
+    .profile-container {
+        max-width: 90%;
+        margin-top: 50px;
+    }
+    
+    .profile-photo {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .usuario {
+        font-size: 30px;
+    }
+
+    .profile-card li {
+        font-size: 16px;
+    }
+
+    .btn {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) { /* Celulares */
+    .profile-container {
+        max-width: 95%;
+        margin-top: 30px;
+        padding: 15px;
+    }
+    
+    .profile-photo {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .usuario {
+        font-size: 25px;
+    }
+
+    .profile-card li {
+        font-size: 14px;
+    }
+
+    .btn {
+        width: 100%;
+        display: block;
+        padding: 10px;
+        font-size: 14px;
+    }
 }

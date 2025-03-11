@@ -1,6 +1,6 @@
 /* Estilos generales */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Montserrat Alternates', sans-serif;
     background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)), url('/static/img/fondo-login.jpg'); 
 	background-size: 100% 100%;
 	background-repeat: no-repeat; 
@@ -68,7 +68,7 @@ button:hover {
 }
 
 .success {
-    color: green;
+    color: rgb(255, 234, 0);
     font-size: 14px;
 }
 

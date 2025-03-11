@@ -1,23 +1,24 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap');
 
-
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
-    font-family: Arial, sans-serif;
-    /* background: linear-gradient(45deg, #a85a00c9,#ffffffc0 );   */
+body {
+    
     background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)), url('/static/img/fondo-login.jpg'); 
-	background-size: 100% 100%;
-	background-repeat: no-repeat; 
+    background-size: 100% 100%;
+    font-family: 'Montserrat Alternates', sans-serif;
+    
+    background-repeat: no-repeat; 
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    padding: 20px; /* Asegura margen en dispositivos pequeños */
 }
 
 main {
@@ -25,35 +26,32 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
 }
 
 .form-container {
-    background-color: rgba(255, 255, 255, 0.466);
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgb(255, 255, 255);
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 60px;  /* Aumentamos el padding */
-
-    width: 90%;
-    max-width: 500px;  /* Aumentamos el tamaño del formulario */
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgb(255, 255, 255);
+    padding: 60px;
+    width: 400px; /* Tamaño normal en pantallas grandes */
     text-align: center;
 }
 
 h2 {
     color: white;
-    font-size: 2.5rem;  /* Aumentamos tamaño del título */
+    font-size: 2.5rem;
     margin-bottom: 20px;
 }
 
 form input {
     width: 100%;
-    padding: 12px;  /* Aumentamos el padding */
+    padding: 12px;
     margin-bottom: 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     background: white;
-    font-size: 18px;  /* Aumentamos tamaño de fuente */
+    font-size: 18px;
 }
 
 button {
@@ -62,8 +60,8 @@ button {
     background-color: black;
     color: white;
     border: none;
-    border-radius: 5px;
-    font-size: 18px;  /* Aumentamos tamaño de fuente */
+    border-radius: 8px;
+    font-size: 18px;
     cursor: pointer;
 }
 
@@ -75,7 +73,7 @@ button:hover {
 p {
     color: white;
     margin-top: 15px;
-    font-size: 16px;  /* Aumentamos tamaño del texto */
+    font-size: 16px;
 }
 
 a {
@@ -86,4 +84,58 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+/* RESPONSIVE DESIGN */
+
+/* Para pantallas medianas (tabletas y laptops pequeñas) */
+@media (max-width: 1024px) {
+    .form-container {
+        width: 80%; /* Se agranda en pantallas medianas */
+        max-width: 500px;
+        padding: 50px;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+}
+
+/* Para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%;
+        max-width: 500px; /* Se agranda un poco en móviles */
+        padding: 40px;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    form input, button {
+        font-size: 16px;
+        padding: 10px;
+    }
+}
+
+/* Para pantallas muy pequeñas (menos de 480px) */
+@media (max-width: 480px) {
+    .form-container {
+        width: 95%;
+        padding: 30px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    form input, button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    p, a {
+        font-size: 14px;
+    }
 }

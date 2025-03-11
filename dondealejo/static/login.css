@@ -8,7 +8,7 @@
 }
 
 body{
-    font-family: Arial, sans-serif;
+    font-family: 'Montserrat Alternates', sans-serif;
     /* background: linear-gradient(45deg, #a85a00c9,#ffffffc0 );   */
     background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)), url('/static/img/fondo-login.jpg'); 
 	background-size: 100% 100%;
