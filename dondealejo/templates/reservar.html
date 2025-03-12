@@ -3,16 +3,13 @@
 {% block content %}
 {% load static %} 
 
+<link rel="stylesheet" href="{% static 'reservar.css' %}">
+<br>
+<br>
 <body>
-    <br>
-    <br>
-    <br>
-    <link rel="stylesheet" href="{% static 'reservar.css' %}">
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    <div class="container">
-        <br>
+    <div class="reserva-container">
         <h2>Haz tu Reserva</h2>
-        <br>
+    
         <!-- Mensajes de éxito o error -->
         {% if messages %}
             {% for message in messages %}
@@ -21,57 +18,58 @@
                 </div>
             {% endfor %}
         {% endif %}
-
+    
         <!-- Formulario de reserva -->
         <form method="POST" action="{% url 'reservar' %}">
             {% csrf_token %}
             {{ form.non_field_errors }}
-            
+    
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
                 {{ form.nombre.errors }}
                 {{ form.nombre }}
             </div>
-            <br>
+    
             <div class="form-group">
-                <label for="nombre">Email:</label>
+                <label for="email">Email:</label>
                 {{ form.email.errors }}
                 {{ form.email }}
             </div>
-            <br>
+    
             <div class="form-group">
-                <label for="nombre">Teléfono:</label>
+                <label for="telefono">Teléfono:</label>
                 {{ form.telefono.errors }}
                 {{ form.telefono }}
             </div>
-            <br>
+    
             <div class="form-group">
-                <label for="nombre">Fecha:</label>
+                <label for="fecha">Fecha:</label>
                 {{ form.fecha.errors }}
                 {{ form.fecha }}
             </div>
-            <br>
+    
             <div class="form-group">
-                <label for="nombre">Hora:</label>
+                <label for="hora">Hora:</label>
                 {{ form.hora.errors }}
                 {{ form.hora }}
             </div>
-            <br>
+    
             <div class="form-group">
-                <label for="nombre">Numero de personas:</label>
+                <label for="cantidad_personas">Número de personas:</label>
                 {{ form.cantidad_personas.errors }}
                 {{ form.cantidad_personas }}
             </div>
-            <br>
+    
             <div class="form-group">
-                <label for="nombre">Mensaje adicional:</label>
+                <label for="mensaje">Mensaje adicional:</label>
                 {{ form.mensaje.errors }}
                 {{ form.mensaje }}
             </div>
-            <br>
+    
             <button type="submit">Reservar</button>
         </form>
     </div>
+    
 </body>
 <br>
 <br>

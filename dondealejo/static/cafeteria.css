@@ -1,48 +1,65 @@
-.contenedor {
-  background: linear-gradient(45deg, #a85a00c9, #ffffffc0);
-  flex: 1;
+/* Contenedor de tarjetas */
+.container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 50px 20px;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  flex-wrap: wrap; /* Permite que las tarjetas se acomoden en pantallas pequeñas */
 }
 
-.cafeteria {
-  text-align: center;
-  background: white;
-  padding: 40px 20px;
-  margin: 40px auto;
-  max-width: 1200px;
-  width: 90%;
-}
-
-.contenido_imagenes {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-  margin: 30px 0;
-}
-
-.contenido_imagenes img {
-  width: 300px;
-  height: 300px;
-  object-fit: cover;
+/* Tarjeta */
+.card {
+  position: relative;
+  width: 280px; /* Ajustado para mejor adaptación */
+  height: 280px;
+  overflow: hidden;
   border-radius: 10px;
-  margin-bottom: 20px;
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-in-out;
 }
 
-.contenido_imagenes img:hover {
-  transform: scale(1.1);
+/* Efecto al pasar el mouse */
+.card:hover {
+  transform: scale(1.05);
 }
 
-.cafeteria h2 {
+/* Imagen dentro de la tarjeta */
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+/* Oscurecer imagen al pasar el mouse */
+.card:hover img {
+  filter: brightness(50%);
+}
+
+/* Descripción oculta hasta hacer hover */
+.description {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 15px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.card:hover .description {
+  opacity: 1;
+}
+
+h2 {
   font-size: 2.5rem;
-  color: #000000;
-  margin: 20px 0;
   font-weight: bold;
+  text-align: center;
+  color: black;
 }
 
 .cafeteria p {
@@ -62,7 +79,7 @@
 .btn-domicilio {
   display: inline-block;
   padding: 14px 25px;
-  background-color: #000000;
+  background-color: #FF5722;
   color: white;
   font-size: 1.3em;
   font-weight: bold;
@@ -72,7 +89,7 @@
 }
 
 .btn-domicilio:hover {
-  background-color: #333;
+  background-color: #ff3c00;
   transform: scale(1.05);
 }
 

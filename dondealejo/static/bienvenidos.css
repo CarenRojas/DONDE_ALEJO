@@ -1,4 +1,4 @@
-
+/* Estilos generales */
 .welcome-container {
     display: flex;
     align-items: center;
@@ -11,7 +11,6 @@
     text-align: center;
 }
 
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -23,7 +22,7 @@
     }
 }
 
-
+/* Contenedor principal */
 .contenedor {
     display: flex;
     justify-content: center;
@@ -32,13 +31,12 @@
     flex-wrap: wrap;
 }
 
-
+/* Texto de bienvenida */
 .text-content {
     max-width: 600px;
     opacity: 0;
     animation: fadeInText 2s ease-in-out forwards 0.5s;
 }
-
 
 @keyframes fadeInText {
     from {
@@ -51,7 +49,6 @@
     }
 }
 
-
 .text-content h1 {
     font-size: 2.5rem;
     color: #000000;
@@ -59,7 +56,6 @@
     text-align: center;
     font-weight: bold;
 }
-
 
 .text-content p {
     font-size: 1.2rem;
@@ -69,12 +65,11 @@
     padding: 0 10px; 
 }
 
-
+/* Imagen del chef */
 .image-container {
     opacity: 0;
     animation: fadeInImage 2s ease-in-out forwards 1s;
 }
-
 
 @keyframes fadeInImage {
     from {
@@ -87,7 +82,6 @@
     }
 }
 
-
 .image-container img {
     height: 350px;
     width: 350px;
@@ -96,14 +90,74 @@
     transition: transform 0.3s ease-in-out;
 }
 
-
 .image-container img:hover {
     transform: scale(1.05);
 }
 
+ /* Galería 3D */
+ .titulo-galeria {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap; /* Evita que el texto se divida en dos líneas */
+    color: black;
+    font-weight: bold;
+    font-size: 40px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.scene {
+    width: 300px;
+    height: 300px;
+    perspective: 1000px;
+    margin: 50px auto;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+    
+}
+
+.carousel {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    animation: rotate 10s infinite linear;
+}
+
+/* Ajuste para separar las imágenes en el carrusel */
+.carousel img {
+    width: 90%;
+    height: 90%;
+    position: absolute;
+    backface-visibility: hidden;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.751);
+}
+
+/* Separación de imágenes en el carrusel */
+.carousel img:nth-child(1) { transform: rotateY(0deg) translateZ(180px); }
+.carousel img:nth-child(2) { transform: rotateY(90deg) translateZ(180px); }
+.carousel img:nth-child(3) { transform: rotateY(180deg) translateZ(180px); }
+.carousel img:nth-child(4) { transform: rotateY(270deg) translateZ(180px); }
+
+@keyframes rotate {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+
+/* Clase para hacer visible la animación */
+.visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
 
 
-
+/* Responsividad */
 @media (max-width: 768px) {
     .contenedor {
         flex-direction: column; 
@@ -123,8 +177,25 @@
         width: 280px;
         height: 280px;
     }
-}
 
+    .scene {
+        width: 250px;
+        height: 250px;
+    }
+
+    .carousel img {
+        width: 85%;
+        height: 85%;
+        margin: 10px;
+    }
+
+    .carousel img:nth-child(1),
+    .carousel img:nth-child(2),
+    .carousel img:nth-child(3),
+    .carousel img:nth-child(4) {
+        transform: rotateY(calc(90deg * var(--index))) translateZ(160px);
+    }
+}
 
 @media (max-width: 480px) {
     .welcome-container {
@@ -147,5 +218,23 @@
     .image-container img {
         width: 250px;
         height: 250px;
+    }
+
+    .scene {
+        width: 200px;
+        height: 200px;
+    }
+
+    .carousel img {
+        width: 80%;
+        height: 80%;
+        margin: 8px;
+    }
+
+    .carousel img:nth-child(1),
+    .carousel img:nth-child(2),
+    .carousel img:nth-child(3),
+    .carousel img:nth-child(4) {
+        transform: rotateY(calc(90deg * var(--index))) translateZ(140px);
     }
 }

@@ -3,19 +3,14 @@
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'bienvenidos.css' %}">
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<br><br><br><br><br>
+
 <div class="welcome_container">
     <div class="contenedor">
         <div class="text-content">
             <h1>Bienvenidos al restaurante Donde Alejo</h1>
             <p>Disfruta de una experiencia culinaria única, donde el sabor y la tradición se combinan para deleitar tus sentidos. 
-        Nuestro restaurante te espera con una selección de los mejores platillos preparados con ingredientes frescos y mucho amor.</p>
+                Nuestro restaurante te espera con una selección de los mejores platillos preparados con ingredientes frescos y mucho amor.</p>
         </div>
         <div class="image-container">
             <img src="{% static 'img/alejo.jpeg' %}" alt="Chef sirviendo un plato delicioso">
@@ -23,16 +18,57 @@
     </div>
 </div>
 
-
-
-
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 
+<body>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    <!-- Galería 3D -->
+    <h1 class="titulo-galeria">🍽️ Delicias en Imágenes</h1>
+    <br>
+    <br>
+    <div class="scene">
+        <div class="carousel">
+            <img src="{% static 'img/1.jpeg' %}" alt="Imagen 1">
+            <img src="{% static 'img/2.jpeg' %}" alt="Imagen 2">
+            <img src="{% static 'img/3.jpeg' %}" alt="Imagen 3">
+            <img src="{% static 'img/4.jpeg' %}" alt="Imagen 4">
+            <img src="{% static 'img/5.jpeg' %}" alt="Imagen 4">
+            <img src="{% static 'img/6.jpeg' %}" alt="Imagen 4">
+            <img src="{% static 'img/7.jpeg' %}" alt="Imagen 4">
+            <img src="{% static 'img/8.jpeg' %}" alt="Imagen 4">
+            <img src="{% static 'img/9.jpeg' %}" alt="Imagen 4">
+            <img src="{% static 'img/10.jpeg' %}" alt="Imagen 4">
+            
+        </div>
+    </div>
 
+    <script>
+        // Función para hacer visible el contenido con efecto de aparición
+        document.addEventListener("DOMContentLoaded", function() {
+            const elementos = document.querySelectorAll(".titulo-galeria, .scene");
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            elementos.forEach(el => observer.observe(el));
+        });
+    </script>
+
+</body>
+<br>
+<br>
+<br>
+<br>
 
 {% endblock %}

@@ -4,18 +4,39 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'cafeteria.css' %}">
 
-<div class="cafeteria">
+<section class="cafeteria">
+  <br>
+  <br>
+  <br>
   <h2>Cafetería Donde Alejo</h2>
-  
-  <div class="contenido_imagenes">
-    <img src="{% static 'img/cafeteria1.jpeg' %}" alt="Menú Cafetería Donde Alejo">
-    <img src="{% static 'img/cafeteria.jpeg' %}" alt="Menú Cafetería Donde Alejo">
-    <img src="{% static 'img/pollo.jpeg' %}" alt="Menú Cafetería Donde Alejo">
+  <br>
+  <div class="container">
+    
+    <div class="card">
+        <img src="{% static 'img/cafeteria1.jpeg' %}" alt="Desayuno 1">
+        <div class="description">Pastelito de queso - $2.000</div>
+    </div>
+    <div class="card">
+        <img src="{% static 'img/cafeteria2.jpeg' %}" alt="Desayuno 2">
+        
+    </div>
+    <div class="card">
+        <img src="{% static 'img/pollo.jpeg' %}" alt="Desayuno 3">
+        <div class="description">Pastelito de pollo - $2.000</div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <p class="cafeteria">Haz tu pedido y disfruta de nuestros deliciosos productos.</p>
+    <div class="contenedor-boton">
+      <a class="btn-domicilio" href="{% url 'domicilios' %}">📦 Pedir Domicilio</a>
+    </div>
   </div>
- 
-  <p>Haz tu pedido y disfruta de nuestros deliciosos productos.</p>
-  <div class="contenedor-boton">
-    <a class="btn-domicilio" href="{% url 'domicilios' %}">📦 Pedir Domicilio</a>
-  </div>
-</div>
+  <br>
+  <br>
+  <br>
+</section>
+
+
+
 {% endblock %}

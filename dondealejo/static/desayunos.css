@@ -3,6 +3,7 @@ h2 {
     font-size: 2.5rem;
     font-weight: bold;
     text-align: center;
+    color: black;
 }
 
 .desayunos {
@@ -71,7 +72,7 @@ h2 {
     display: inline-block;
     margin-top: 30px;
     padding: 14px 25px;
-    background-color: #000000;
+    background-color: #FF5722;
     color: white;
     font-size: 1.3em;
     font-weight: bold;
@@ -82,22 +83,18 @@ h2 {
 }
 
 .btn-domicilio:hover {
-    background-color: #333;
+    background-color: #ff3c00;
     transform: scale(1.05);
 }
 
-/* ============================= */
-/*          RESPONSIVE           */
-/* ============================= */
 
-/* Para tablets (768px o menos) */
 @media (max-width: 768px) {
     h2 {
         font-size: 2rem;
     }
 
     .container {
-        gap: 15px; /* Reduce el espacio entre tarjetas */
+        gap: 15px;
     }
 
     .card {
@@ -115,14 +112,14 @@ h2 {
     }
 }
 
-/* Para celulares (480px o menos) */
+
 @media (max-width: 480px) {
     h2 {
         font-size: 1.8rem;
     }
 
     .container {
-        flex-direction: column; /* Tarjetas una encima de otra */
+        flex-direction: column;
         align-items: center;
     }
 
@@ -140,6 +137,6 @@ h2 {
         font-size: 1.1em;
         padding: 10px 18px;
         display: block;
-        margin: 20px auto; /* Centra el botón en móviles */
+        margin: 20px auto; 
     }
 }

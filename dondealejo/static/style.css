@@ -12,10 +12,10 @@ body {
 /* CABECERA */
 .alejo-cabecera {
     width: 100%;
-    background: #000000;
+    background: #FF5722;
     color: #ffffff;
     padding: 1rem 0;
-    box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.668);
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.144);
     position: relative;
 }
 
@@ -72,15 +72,15 @@ body {
     padding: 10px 0;
 }
 
-.alejo-enlace:hover {
-    color: #cccccc;
+/* .alejo-enlace:hover {
+    color: #fffb00;
     text-decoration: none;
-}
+} */
 
 /* BOTONES Y MENÚS */
 .alejo-boton-menu {
     background-color: transparent !important;
-    color: white !important;
+    color: rgb(255, 255, 255) !important;
     border: none !important;
     padding: 10px 16px !important;
     font-size: 1.2rem;
@@ -102,8 +102,8 @@ body {
 }
 
 .alejo-item-menu:hover {
-    background-color: black !important;
-    color: white !important;
+    background-color: rgb(213, 252, 255) !important;
+    color: rgb(0, 0, 0) !important;
     text-decoration: none;
 }
 
@@ -140,7 +140,7 @@ body {
 .alejo-usuario-img {
     width: 30px;
     height: 30px;
-    border-radius: 50%;
+   
 }
 
 /* Menú desplegable */
@@ -205,7 +205,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgb(255, 0, 0);
     z-index: 998;
 }
 
@@ -215,9 +215,12 @@ body {
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 20px 10px;
-    background: #000000;
-    color: white;
+    background: #F5F5DC;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.253);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
 }
+
 
 .alejo-footer-box {
     display: flex;
