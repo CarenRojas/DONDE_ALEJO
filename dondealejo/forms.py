@@ -1,26 +1,38 @@
+# Standard library imports
 import logging
 import unicodedata
 
-from django import forms # type: ignore
+# Django imports
+from django import forms
+from django.contrib.auth import authenticate, get_user_model, password_validation
+from django.contrib.auth.hashers import UNUSABLE_PASSWORD_PREFIX, identify_hasher
+from django.contrib.auth.models import User
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.exceptions import ValidationError
+from django.core.mail import EmailMultiAlternatives
+from django.core.validators import RegexValidator
+from django.conf import settings
+from django.template import loader
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+from django.utils.text import capfirst
+from django.utils.translation import gettext
+from django.utils.translation import gettext_lazy as _
+from django.views.decorators.debug import sensitive_variables
 
-from django.contrib.auth import authenticate, get_user_model, password_validation # type: ignore
-from django.contrib.auth.hashers import UNUSABLE_PASSWORD_PREFIX, identify_hasher # type: ignore
-from django.contrib.auth.models import User # type: ignore
-from django.contrib.auth.tokens import default_token_generator # type: ignore
-from django.contrib.sites.shortcuts import get_current_site # type: ignore
-from django.core.exceptions import ValidationError # type: ignore
-from django.core.mail import EmailMultiAlternatives # type: ignore
-from django.template import loader # type: ignore
-from django.utils.encoding import force_bytes # type: ignore
-from django.utils.http import urlsafe_base64_encode # type: ignore
-from django.utils.text import capfirst # type: ignore
-from django.utils.translation import gettext # type: ignore
-from django.utils.translation import gettext_lazy as _  # type: ignore
-from django.views.decorators.debug import sensitive_variables  # type: ignore
+# Local imports
+# Ensure these modules exist in your project structure
+from .models import Orden, Sugerencia, Reserva, Domicilio
 
+# Setup
 UserModel = get_user_model()
 logger = logging.getLogger("django.contrib.auth")
 
+
+# ------------------------------------------------------
+# Helper Functions
+# ------------------------------------------------------
 
 def _unicode_ci_compare(s1, s2):
     """
@@ -33,6 +45,10 @@ def _unicode_ci_compare(s1, s2):
         == unicodedata.normalize("NFKC", s2).casefold()
     )
 
+
+# ------------------------------------------------------
+# Authentication Widget Classes
+# ------------------------------------------------------
 
 class ReadOnlyPasswordHashWidget(forms.Widget):
     template_name = "auth/widgets/read_only_password_hash.html"
@@ -68,6 +84,10 @@ class ReadOnlyPasswordHashWidget(forms.Widget):
         return None
 
 
+# ------------------------------------------------------
+# Auth Field Classes
+# ------------------------------------------------------
+
 class ReadOnlyPasswordHashField(forms.Field):
     widget = ReadOnlyPasswordHashWidget
 
@@ -97,13 +117,17 @@ class UsernameField(forms.CharField):
         }
 
 
+# ------------------------------------------------------
+# Auth Form Mixins
+# ------------------------------------------------------
+
 class SetPasswordMixin:
     """
     Form mixin that validates and sets a password for a user.
     """
 
     error_messages = {
-        "password_mismatch": _("The two password fields didn’t match."),
+        "password_mismatch": _("The two password fields didn't match."),
     }
 
     @staticmethod
@@ -226,6 +250,10 @@ class SetUnusablePasswordMixin:
         return user
 
 
+# ------------------------------------------------------
+# Auth Form Classes
+# ------------------------------------------------------
+
 class BaseUserCreationForm(SetPasswordMixin, forms.ModelForm):
     """
     A form that creates a user, with no privileges, from the given username and
@@ -288,12 +316,18 @@ class UserCreationForm(BaseUserCreationForm):
             return username
 
 
+class CustomUserCreationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'username', 'email', 'password', 'password']
+
+
 class UserChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField(
         label=_("Password"),
         help_text=_(
             "Raw passwords are not stored, so there is no way to see "
-            "the user’s password."
+            "the user's password."
         ),
     )
 
@@ -603,7 +637,6 @@ class AdminPasswordChangeForm(SetUnusablePasswordMixin, SetPasswordMixin, forms.
 
 
 class AdminUserCreationForm(SetUnusablePasswordMixin, UserCreationForm):
-
     usable_password = SetUnusablePasswordMixin.create_usable_password_field()
 
     def __init__(self, *args, **kwargs):
@@ -612,61 +645,20 @@ class AdminUserCreationForm(SetUnusablePasswordMixin, UserCreationForm):
         self.fields["password2"].required = False
 
 
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+# ------------------------------------------------------
+# Custom Application Forms
+# ------------------------------------------------------
 
-class CustomUserCreationForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ['first_name', 'last_name', 'username', 'email', 'password', 'password']
-
-
-
-#pasarela
-from .models import Orden
-
-class OrdenForm(forms.ModelForm):
-    METODOS_PAGO = [
-        ('nequi', 'Nequi'),
-        ('bancolombia', 'Bancolombia'),
-    ]
-
-    metodo_pago = forms.ChoiceField(
-        choices=METODOS_PAGO,
-        widget=forms.RadioSelect,
-        required=True
-    )
-    class Meta:
-        model = Orden
-        fields = ['nombre', 'email', 'telefono', 'metodo_pago']
-        widgets = {
-            'nombre': forms.TextInput(attrs={'class': 'form-control',
-'placeholder': 'Tu nombre completo'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control',
-'placeholder': 'tucorreo@ejemplo.com'}),
-            'telefono': forms.TextInput(attrs={'class': 'form-control',
-'placeholder': 'Tu número de teléfono'})
-}
-
-
-#sugerencias
-from django import forms
-from .models import Sugerencia
-
+# 1. Suggestion Form
 class SugerenciaForm(forms.ModelForm):
     class Meta:
         model = Sugerencia
         fields = ['nombre', 'email', 'mensaje']
 
 
-
-#reservar
-from django import forms
-from django import forms
 from django.core.mail import send_mail
-from django.conf import settings
-from .models import Reserva
 
+# 2. Reservation Forms
 class ReservaForm(forms.ModelForm):
     class Meta:
         model = Reserva
@@ -731,9 +723,8 @@ class ReservaForm(forms.ModelForm):
             fail_silently=False,
         )
 
-from django import forms
-from .models import Domicilio
 
+# 3. Delivery Form
 class DomicilioForm(forms.ModelForm):
     class Meta:
         model = Domicilio
@@ -741,4 +732,53 @@ class DomicilioForm(forms.ModelForm):
         widgets = {
             'direccion': forms.Textarea(attrs={'rows': 3}),
             'pedido': forms.Textarea(attrs={'rows': 5}),
+        }
+
+
+# 4. Order and Payment Forms
+class OrdenForm(forms.ModelForm):
+    METODOS_PAGO = [
+        ('nequi', 'Nequi'),
+        ('bancolombia', 'Bancolombia'),
+    ]
+
+    metodo_pago = forms.ChoiceField(
+        choices=METODOS_PAGO,
+        widget=forms.RadioSelect,
+        required=True,
+        label="Método de pago"
+    )
+
+    telefono = forms.CharField(
+        max_length=15,
+        validators=[RegexValidator(r'^\d{7,15}$', message="Ingresa un número de teléfono válido.")],
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Ejemplo: 3001234567'
+        })
+    )
+    
+    comprobante = forms.ImageField(
+        required=False,
+        label="Comprobante de pago",
+        widget=forms.FileInput(attrs={
+            'class': 'form-control',
+            'accept': 'image/*'
+        })
+    )
+
+    class Meta:
+        model = Orden
+        fields = ['nombre', 'email', 'telefono', 'metodo_pago', 'comprobante']
+        widgets = {
+            'nombre': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Tu nombre completo'
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'tucorreo@ejemplo.com'
+            }),
+            
+            
         }

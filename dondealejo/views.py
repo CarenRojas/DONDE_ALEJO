@@ -326,6 +326,7 @@ def pasarela(request):
         form = OrdenForm(request.POST)
         metodo_pago = request.POST.get('metodo_pago')
 
+    
 
         if form.is_valid()  and metodo_pago:
             orden = form.save(commit=False)

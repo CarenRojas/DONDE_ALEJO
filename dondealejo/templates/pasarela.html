@@ -28,8 +28,7 @@
                 {% csrf_token %}
 
                 <div class="form-group">
-                    <label for="{{ form.nombre.id_for_label }}">Nombre
-Completo</label>
+                    <label for="{{ form.nombre.id_for_label }}">Nombre Completo</label>
 
                     {{ form.nombre }}
                     {% if form.nombre.errors %}
@@ -38,8 +37,7 @@ Completo</label>
                 </div>
 
                 <div class="form-group">
-                    <label for="{{ form.email.id_for_label }}">Correo
-Electrónico</label>
+                    <label for="{{ form.email.id_for_label }}">Correo Electrónico</label>
                     {{ form.email }}
                     {% if form.email.errors %}
                     <div class="form-error">{{ form.email.errors }}</div>
@@ -64,10 +62,31 @@ Electrónico</label>
                         </div>
                     {% endfor %}
                     {% if form.metodo_pago.errors %}
-
-
-
                     <div class="form-error">{{ form.metodo_pago.errors }}</div>
+                    {% endif %}
+                </div>
+
+
+                <!-- QR de pago -->
+                <div id="nequi-qr" class="payment-qr" style="display: none;">
+                    <h3>Pago con Nequi</h3>
+                    <p>Escanea este código QR para realizar el pago:</p>
+                    <img src="{% static 'img/hamburguesa2.png' %}" alt="QR Nequi" class="qr-image">
+                </div>
+                
+                <div id="bancolombia-qr" class="payment-qr" style="display: none;">
+                    <h3>Pago con Bancolombia</h3>
+                    <p>Escanea este código QR para realizar el pago:</p>
+                    <img src="{% static 'img/hamburguesa2.png' %}" alt="QR Bancolombia" class="qr-image">
+                </div>
+                
+                <!-- Subida de comprobante -->
+                <div id="comprobante-container" class="form-group" style="display: none;">
+                    <label for="{{ form.comprobante.id_for_label }}">Comprobante de Pago</label>
+                    {{ form.comprobante }}
+                    <small class="comprobante-info">Por favor sube una captura del comprobante de pago</small>
+                    {% if form.comprobante.errors %}
+                    <div class="form-error">{{ form.comprobante.errors }}</div>
                     {% endif %}
                 </div>
 
@@ -106,4 +125,43 @@ item.producto.nombre }}" class="resumen-imagen">
         </div>
     </div>
 </div>
+
+<script>
+    // Script para mostrar/ocultar QRs y campo de comprobante
+    document.addEventListener('DOMContentLoaded', function() {
+        const metodoPagoInputs = document.querySelectorAll('input[name="metodo_pago"]');
+        const nequiQR = document.getElementById('nequi-qr');
+        const bancolombiaQR = document.getElementById('bancolombia-qr');
+        const comprobanteContainer = document.getElementById('comprobante-container');
+        
+        metodoPagoInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                // Ocultar todos los QRs primero
+                nequiQR.style.display = 'none';
+                bancolombiaQR.style.display = 'none';
+                
+                // Mostrar el QR correspondiente
+                if (this.value === 'nequi') {
+                    nequiQR.style.display = 'block';
+                } else if (this.value === 'bancolombia') {
+                    bancolombiaQR.style.display = 'block';
+                }
+                
+                // Siempre mostrar el campo de comprobante cuando se selecciona un método
+                comprobanteContainer.style.display = 'block';
+            });
+        });
+        
+        // Verificar si ya hay un método seleccionado (al cargar la página)
+        const selectedMethod = document.querySelector('input[name="metodo_pago"]:checked');
+        if (selectedMethod) {
+            if (selectedMethod.value === 'nequi') {
+                nequiQR.style.display = 'block';
+            } else if (selectedMethod.value === 'bancolombia') {
+                bancolombiaQR.style.display = 'block';
+            }
+            comprobanteContainer.style.display = 'block';
+        }
+    });
+</script>
 {% endblock %}
