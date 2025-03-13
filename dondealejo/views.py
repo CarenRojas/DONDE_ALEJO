@@ -599,3 +599,54 @@ from django.shortcuts import render
 from django.core.mail import send_mail
 from django.conf import settings
 from .models import Sugerencia
+
+
+
+
+
+
+
+
+
+
+
+
+#historial de domicilios
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from .models import Domicilio
+
+@login_required
+def historial_domicilios(request):
+    domicilios = Domicilio.objects.all().order_by('-fecha')
+    return render(request, 'historial_domicilios.html', {'domicilios': domicilios})
+
+
+
+#historial de orden
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
+from .models import Orden
+
+def historial_ordenes(request):
+    ordenes = Orden.objects.all()
+    return render(request, 'historial_ordenes.html', {'ordenes': ordenes})
+
+def cambiar_estado_orden(request, orden_id):
+    if request.method == "POST":  # Asegura que solo se procesen solicitudes POST
+        orden = get_object_or_404(Orden, id=orden_id)
+        orden.pagado = not orden.pagado
+        orden.save()
+    return redirect('historial_ordenes')
+
+
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def cambiar_estado_orden(request, orden_id):
+    if request.method == "POST":
+        orden = get_object_or_404(Orden, id=orden_id)
+        orden.pagado = not orden.pagado
+        orden.save()
+    return redirect('historial_ordenes')
+

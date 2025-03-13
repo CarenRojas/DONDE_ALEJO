@@ -20,6 +20,7 @@ from dondealejo import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 # from web.views import perfil
 
 urlpatterns = [
@@ -47,6 +48,10 @@ urlpatterns = [
     path('carrito/eliminar/<int:item_id>/', views.eliminar_item, name='eliminar_item'),
     path('pasarela/', views.pasarela, name='pasarela'),
     path('confirmacion/<int:orden_id>/', views.confirmacion, name='confirmacion'),
+    path('historial/', views.historial_domicilios, name='historial_domicilios'),
+    path('historial-ordenes/', views.historial_ordenes, name='historial_ordenes'),
+    path('cambiar_estado/<int:orden_id>/', views.cambiar_estado_orden, name='cambiar_estado_orden'),
+
     
     path('perfil/', views.perfil, name='perfil'),
     

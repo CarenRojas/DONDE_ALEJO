@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+<body>
+    <br>
+    <br>
+    <h1>Historial de Domicilios</h1>
+    
+    <table border="1">
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Pedido</th>
+            <th>Fecha</th>
+        </tr>
+        {% for domicilio in domicilios %}
+        <tr>
+            <td>{{ domicilio.nombre }}</td>
+            <td>{{ domicilio.email }}</td>
+            <td>{{ domicilio.direccion }}</td>
+            <td>{{ domicilio.telefono }}</td>
+            <td>{{ domicilio.pedido }}</td>
+            <td>{{ domicilio.fecha }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No hay domicilios registrados.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+<br>
+<br>
+<style>
+ 
+    h1 {
+        color: #333;
+        text-align: center;
+        margin: 20px;
+        font-weight: bold;
+    }
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    th, td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+    th {
+        background-color: #007BFF;
+        color: white;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    tr:hover {
+        background-color: #ddd;
+    }
+</style>
+{% endblock %}
