@@ -212,7 +212,8 @@ def carrito (request):
 def sesion (request):
     return render(request, 'sesion.html')
 
-
+def manual (request):
+    return render(request, 'manual.html')
 
 def contacto (request):
     return render(request, 'contacto.html')
@@ -626,27 +627,18 @@ def historial_domicilios(request):
 #historial de orden
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 from .models import Orden
 
 def historial_ordenes(request):
     ordenes = Orden.objects.all()
     return render(request, 'historial_ordenes.html', {'ordenes': ordenes})
 
-def cambiar_estado_orden(request, orden_id):
-    if request.method == "POST":  # Asegura que solo se procesen solicitudes POST
-        orden = get_object_or_404(Orden, id=orden_id)
-        orden.pagado = not orden.pagado
-        orden.save()
-    return redirect('historial_ordenes')
-
-
-from django.views.decorators.csrf import csrf_exempt
-
 @csrf_exempt
 def cambiar_estado_orden(request, orden_id):
     if request.method == "POST":
         orden = get_object_or_404(Orden, id=orden_id)
-        orden.pagado = not orden.pagado
+        orden.pagado = not orden.pagado  # Alterna entre pagado y no pagado
         orden.save()
-    return redirect('historial_ordenes')
-
+        return JsonResponse({'estado': orden.pagado})  # Devuelve JSON en lugar de redirigir
+    return JsonResponse({'error': 'Método no permitido'}, status=400)

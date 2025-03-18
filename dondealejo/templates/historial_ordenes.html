@@ -1,150 +1,68 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-
-
-<body>
-    <br>
-    <br>
-    <h1>Historial de Órdenes</h1>
-    <br>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Teléfono</th>
-            <th>Total</th>
-            <th>Método de Pago</th>
-            <th>Fecha</th>
-            <th>Estado</th>
-            <th>Acción</th>
-        </tr>
-        {% for orden in ordenes %}
-        <tr>
-            <td>{{ orden.id }}</td>
-            <td>{{ orden.nombre }}</td>
-            <td>{{ orden.email }}</td>
-            <td>{{ orden.telefono }}</td>
-            <td>${{ orden.total }}</td>
-            <td>{{ orden.metodo_pago }}</td>
-            <td>{{ orden.fecha_creacion }}</td>
-            <td>{{ orden.pagado|yesno:"Pagado,No pagado" }}</td>
-            <td>
-                <form action="{% url 'cambiar_estado_orden' orden.id %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit" 
-                        class="btn {% if orden.pagado %}btn-success{% else %}btn-danger{% endif %}">
-                        {% if orden.pagado %}Pagado{% else %}No Pagado{% endif %}
-                    </button>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-</body>
+<link rel="stylesheet" href="{% static 'historial.css' %}">
 <br>
 <br>
 <br>
-<style>
-    body {
-        
-        background-color: #f8f9fa;
-        margin: 0;
-        padding: 0;
-    }
+<h1>Historial de Órdenes</h1>
+<br>
 
-    .container {
-        width: 90%;
-        max-width: 1200px;
-        margin: 20px auto;
-        background: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+        <th>Total</th>
+        <th>Método de Pago</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th>Acción</th>
+    </tr>
+    {% for orden in ordenes %}
+    <tr>
+        <td>{{ orden.id }}</td>
+        <td>{{ orden.nombre }}</td>
+        <td>{{ orden.email }}</td>
+        <td>{{ orden.telefono }}</td>
+        <td>${{ orden.total }}</td>
+        <td>{{ orden.metodo_pago }}</td>
+        <td>{{ orden.fecha_creacion }}</td>
+        <td id="estado-{{ orden.id }}">{{ orden.pagado|yesno:"Pagado,No pagado" }}</td>
+        <td>
+            <button id="btn-{{ orden.id }}" class="btn {% if orden.pagado %}btn-success{% else %}btn-danger{% endif %}" 
+onclick="cambiarEstado({{ orden.id }})">
+                {% if orden.pagado %}Pagado{% else %}No Pagado{% endif %}
+            </button>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
 
-    h1 {
-        text-align: center;
-        color: #000000;
-        margin-bottom: 20px;
-    }
+<script>
+function cambiarEstado(ordenId) {
+    fetch(`/cambiar-estado/${ordenId}/`, {
+        method: 'POST',
+        headers: { 'X-CSRFToken': '{{ csrf_token }}' }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if ('estado' in data) {
+            let estadoTexto = data.estado ? "Pagado" : "No pagado";
+            let estadoColor = data.estado ? "btn-success" : "btn-danger";
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        background: white;
-        border-radius: 8px;
-        overflow: hidden;
-    }
-
-    th, td {
-        padding: 12px;
-        text-align: center;
-        border: 1px solid #ddd;
-    }
-
-    th {
-        background: #007bff;
-        color: white;
-        font-weight: bold;
-    }
-
-    tr:nth-child(even) {
-        background: #f2f2f2;
-    }
-
-    .badge {
-        padding: 5px 10px;
-        border-radius: 5px;
-        color: white;
-        font-size: 14px;
-    }
-
-    .badge-success {
-        background-color: #28a745; /* Verde cuando está pagado */
-    }
-
-    .badge-danger {
-        background-color: #dc3545; /* Rojo cuando no está pagado */
-    }
-
-    .btn {
-        padding: 6px 12px;
-        border: none;
-        border-radius: 5px;
-        color: white;
-        font-size: 14px;
-        cursor: pointer;
-        width: 100px;
-    }
-
-    .btn-success {
-        background-color: #28a745; /* Verde cuando está pagado */
-    }
-
-    .btn-danger {
-        background-color: #dc3545; /* Rojo cuando no está pagado */
-    }
-
-    .btn:hover {
-        opacity: 0.8;
-    }
-
-    @media (max-width: 768px) {
-        table {
-            font-size: 14px;
+            document.getElementById(`estado-${ordenId}`).innerText = estadoTexto;
+            let btn = document.getElementById(`btn-${ordenId}`);
+            btn.innerText = estadoTexto;
+            btn.className = `btn ${estadoColor}`;
         }
-
-        th, td {
-            padding: 8px;
-        }
-
-        .btn {
-            font-size: 12px;
-            padding: 4px 8px;
-            width: auto;
-        }
-    }
-</style>
+    })
+    .catch(error => console.error('Error:', error));
+}
+</script>
+<br>
+<br>
+<br>
+<br>
 {% endblock %}

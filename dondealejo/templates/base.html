@@ -44,6 +44,7 @@
                         </div>
                         <a href="{% url 'quienes_somos' %}" class="alejo-enlace">Quiénes somos</a>
                         <a href="{% url 'reservar' %}" class="alejo-enlace">Reservar</a>
+                        <a href="{% url 'manual' %}" class="alejo-enlace">Manual</a>
 
                         {% with total_items=request.user.carritoitem_set.count %}
                         {% if total_items > 0 %}

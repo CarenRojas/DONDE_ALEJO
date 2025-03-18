@@ -36,6 +36,7 @@ urlpatterns = [
     path('cafeteria', views.cafeteria, name='cafeteria'),
     path('quienes_somos', views.quienes_somos, name='quienes_somos'),
     path('reservar', views.reservar, name='reservar'),
+    path('manual', views.manual, name='manual'),
     path('register', views.register, name='register'),
     path('login', views.login, name='login'),
     path('restablecer/', views.restablecer, name='restablecer'),

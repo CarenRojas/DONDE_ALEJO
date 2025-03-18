@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Donde Alejo
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <strong>Cuando accedas al sitio web, encontrarás esta sección. Para continuar, simplemente haz clic en el botón "Conoce más sobre nosotros".</strong>
+        </div>
+        <div class="image-container">
+            <img src="{% static 'img/inicio.jpeg' %}" class="uno">
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Inicio de Sesión
+        </button>
+      </h2>
+      <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <strong>Al hacer clic en el botón, serás redirigido a la página de inicio de sesión, donde deberás ingresar tu usuario y contraseña registrados. Si aún no tienes una cuenta, podrás registrarte proporcionando algunos datos personales, lo que te permitirá acceder fácilmente.</strong>
+        </div>
+        <div class="image-container">
+            <img src="{% static 'img/login.jpeg' %}" class="uno">
+        </div>
+        <div class="image-container">
+            <img src="{% static 'img/registro.jpeg' %}" class="uno">
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Restablecer Contraseña
+        </button>
+      </h2>
+      <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <strong>Si olvidaste tu contraseña, en la página de inicio de sesión encontrarás una opción para recuperarla. Solo ingresa tu correo electrónico y recibirás un enlace para restablecerla de forma rápida y sencilla.</strong>
+        </div>
+        <div class="image-container">
+            <img src="{% static 'img/restablecer.jpeg' %}" class="uno">
+        </div>
+      </div>
+    </div>
+
+    <!-- Nueva sección: Menú del restaurante -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          Base principal
+        </button>
+      </h2>
+      <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <strong>Cuando inicies sesión, serás dirigido a la sección donde podrás conocer todas las instalaciones y servicios que ofrece nuestro restaurante.</strong>
+        </div>
+        <div class="image-container">
+            <img src="{% static 'img/bienvenidos.jpeg' %}" class="uno">
+        </div>
+      </div>
+</div>
+
+    <!-- Nueva sección: Proceso de reserva -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          Proceso de Reserva
+        </button>
+      </h2>
+      <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <strong>Reserva tu mesa en pocos pasos. Solo selecciona la fecha, la hora y el número de personas para asegurar tu lugar.</strong>
+        </div>
+        <div class="image-container">
+            <img src="{% static 'img/reserva.jpeg' %}" class="uno">
+        </div>
+      </div>
+    </div>
+
+    <!-- Nueva sección: Confirmación de pedido -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+          Confirmación de Pedido
+        </button>
+      </h2>
+      <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <strong>Una vez realizado tu pedido, recibirás una confirmación con los detalles y el tiempo estimado de entrega.</strong>
+        </div>
+        <div class="image-container">
+            <img src="{% static 'img/pedido.jpeg' %}" class="uno">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <style>
+    /* Estilo general del acordeón */
+.accordion {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para cada ítem del acordeón */
+.accordion-item {
+    border: none;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Botones del acordeón */
+.accordion-button {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-button:hover {
+    background-color: #0056b3;
+}
+
+/* Íconos de expansión */
+.accordion-button::after {
+    color: white;
+}
+
+/* Contenido del acordeón */
+.accordion-body {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 0 0 8px 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Quitar borde del botón al estar colapsado */
+.accordion-button:not(.collapsed) {
+    box-shadow: none;
+}
+
+/* imagenes del menu */
+
+.image-container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 30vh; /* Ajusta la altura según lo necesites */
+}
+
+.image-container img {
+    max-width: 60%; /* Ajusta el tamaño de la imagen */
+    height: auto;
+    border-radius: 10px; /* Opcional: bordes redondeados */
+}
+
+  </style>
+
+
+{% endblock %}
